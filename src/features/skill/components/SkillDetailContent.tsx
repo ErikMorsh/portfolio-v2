@@ -1,4 +1,5 @@
 import { Box, Paper, Typography } from '@mui/material'
+import '../styles/skill.scss'
 import { useTranslation } from 'react-i18next'
 import { Navigate, useParams } from 'react-router-dom'
 import { pickLocale, pickLocaleList } from '@/cv-data'

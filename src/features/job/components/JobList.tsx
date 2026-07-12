@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import '../styles/job.scss'
 import { getAllJobs } from '../lib/jobs'
 import { JobCard } from './JobCard'
 

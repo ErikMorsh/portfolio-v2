@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import '../styles/skill.scss'
 import { getAllSkills } from '../lib/skills'
 import { SkillCard } from './SkillCard'
 

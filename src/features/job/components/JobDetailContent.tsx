@@ -1,4 +1,5 @@
 import { Box, Chip, Paper, Typography } from '@mui/material'
+import '../styles/job.scss'
 import type { CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Navigate, useParams } from 'react-router-dom'

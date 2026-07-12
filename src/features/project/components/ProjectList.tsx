@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import '../styles/project.scss'
 import { getAllProjects } from '../lib/projects'
 import { ProjectCard } from './ProjectCard'
 
