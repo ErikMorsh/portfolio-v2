@@ -1,0 +1,59 @@
+{
+  "app": {
+    "title": "نمونه‌کار | عرفان مرشدزاده"
+  },
+  "welcome": {
+    "sidebar": {
+      "abilities": "توانایی‌ها",
+      "contact": "ارتباطات"
+    },
+    "portfolio": {
+      "title": "این نمونه‌کار",
+      "subtitle": "فناوری‌های ساخت این سایت",
+      "stackAria": "فناوری‌های نمونه‌کار: {{stack}}",
+      "viewSource": "مشاهده سورس در GitHub"
+    },
+    "sections": {
+      "experience": "سوابق شغلی",
+      "projects": "پروژه‌ها",
+      "skills": "مهارت‌ها",
+      "placeholder": "محتوا به‌زودی اضافه می‌شود"
+    }
+  },
+  "theme": {
+    "light": "حالت روشن",
+    "dark": "حالت تاریک",
+    "toggle": "تغییر تم"
+  },
+  "job": {
+    "listTitle": "سوابق شغلی",
+    "listSubtitle": "سمت‌ها و شرکت‌های مسیر حرفه‌ای من.",
+    "viewAll": "مشاهده همه",
+    "viewDetails": "مشاهده جزئیات",
+    "duration": "مدت",
+    "highlights": "اقدامات",
+    "relatedProjects": "پروژه‌های مرتبط",
+    "techStack": "تکنولوژی‌ها",
+    "backToJobs": "بازگشت به سوابق",
+    "backToHome": "بازگشت به خانه",
+    "back": "بازگشت"
+  },
+  "project": {
+    "viewDetails": "مشاهده جزئیات",
+    "goals": "اهداف",
+    "actions": "اقدامات",
+    "techStack": "فناوری‌ها (Tech Stack)"
+  },
+  "skill": {
+    "viewDetails": "مشاهده جزئیات"
+  },
+  "nav": {
+    "home": "خانه",
+    "breadcrumb": "مسیر صفحه"
+  },
+  "language": {
+    "fa": "فارسی",
+    "en": "English",
+    "toggle": "تغییر زبان"
+  }
+}

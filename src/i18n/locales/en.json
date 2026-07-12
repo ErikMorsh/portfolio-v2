@@ -1,0 +1,59 @@
+{
+  "app": {
+    "title": "Portfolio | Erfan Morshedzadeh"
+  },
+  "welcome": {
+    "sidebar": {
+      "abilities": "Abilities",
+      "contact": "Contact"
+    },
+    "portfolio": {
+      "title": "This portfolio",
+      "subtitle": "Stack used to build this site",
+      "stackAria": "Portfolio stack: {{stack}}",
+      "viewSource": "View source on GitHub"
+    },
+    "sections": {
+      "experience": "Experience",
+      "projects": "Projects",
+      "skills": "Skills",
+      "placeholder": "Content coming soon"
+    }
+  },
+  "theme": {
+    "light": "Light mode",
+    "dark": "Dark mode",
+    "toggle": "Toggle theme"
+  },
+  "job": {
+    "listTitle": "Work Experience",
+    "listSubtitle": "Roles and companies from my career path.",
+    "viewAll": "View all",
+    "viewDetails": "View details",
+    "duration": "Duration",
+    "highlights": "Highlights",
+    "relatedProjects": "Related projects",
+    "techStack": "Tech stack",
+    "backToJobs": "Back to jobs",
+    "backToHome": "Back to home",
+    "back": "Back"
+  },
+  "project": {
+    "viewDetails": "View details",
+    "goals": "Goals",
+    "actions": "Actions",
+    "techStack": "Technologies (Tech Stack)"
+  },
+  "skill": {
+    "viewDetails": "View details"
+  },
+  "nav": {
+    "home": "Home",
+    "breadcrumb": "Breadcrumb"
+  },
+  "language": {
+    "fa": "فارسی",
+    "en": "English",
+    "toggle": "Switch language"
+  }
+}

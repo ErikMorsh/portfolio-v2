@@ -1,0 +1,43 @@
+@use '@/shared/styles/variables' as *;
+
+.app-layout {
+  width: 100%;
+  min-height: 100vh;
+
+  &__shell {
+    @include layout-container($layout-max-width);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-block: $layout-padding-block;
+  }
+}
+
+.layout-container {
+  width: 100%;
+  margin-inline: auto;
+
+  &--default {
+    max-width: $layout-max-width;
+  }
+
+  &--narrow {
+    max-width: $layout-narrow-width;
+  }
+
+  &--wide {
+    max-width: $layout-max-width;
+  }
+
+  &--full {
+    max-width: none;
+  }
+}
+
+.layout-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+}
