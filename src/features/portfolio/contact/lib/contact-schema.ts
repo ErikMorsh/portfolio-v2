@@ -7,8 +7,8 @@ export const contactMessageSchema = z.object({
   phone: z.string().trim().max(40).optional().default(''),
   subject: z.string().trim().max(160).optional().default(''),
   message: z.string().trim().min(1).max(5000),
-  /** Honeypot — ignored when filled */
-  website: z.string().optional().default(''),
+  /** Honeypot — bots fill this; browsers must not autofill it */
+  hp_company: z.string().optional().default(''),
 })
 
 export type ContactMessageInput = z.infer<typeof contactMessageSchema>

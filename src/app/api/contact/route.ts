@@ -37,8 +37,9 @@ export async function POST(request: Request) {
   }
 
   const data = parsed.data
-  if (data.website) {
-    // Honeypot tripped — pretend success
+  if (data.hp_company) {
+    // Honeypot tripped — pretend success (no id = not persisted)
+    console.warn('[contact] honeypot tripped; skipping insert')
     return NextResponse.json({ ok: true })
   }
 

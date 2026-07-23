@@ -1,6 +1,32 @@
+.messages-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
 .messages-page__title {
-  margin: 0 0 1rem;
+  margin: 0;
   font-size: 1.4rem;
+}
+
+.messages-page__refresh {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.45rem;
+  background: transparent;
+  color: inherit;
+  padding: 0.4rem 0.7rem;
+  cursor: pointer;
+}
+
+.messages-page__refresh:hover:not(:disabled) {
+  border-color: rgba(124, 140, 255, 0.45);
+}
+
+.messages-page__refresh:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }
 
 .messages-empty {

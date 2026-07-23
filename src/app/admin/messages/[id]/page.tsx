@@ -3,7 +3,7 @@ import { AdminShell } from '@/features/panel/layout/AdminShell'
 import {
   countUnread,
   getMessage,
-  markMessageStatus,
+  markMessageReadOnView,
 } from '@/features/panel/messages/actions'
 import { MessageDetail } from '@/features/panel/messages/MessageDetail'
 import { notFound, redirect } from 'next/navigation'
@@ -23,7 +23,7 @@ export default async function AdminMessageDetailPage({ params }: PageProps) {
   if (!message) notFound()
 
   if (message.status === 'unread') {
-    await markMessageStatus(id, 'read')
+    await markMessageReadOnView(id)
     message.status = 'read'
   }
 

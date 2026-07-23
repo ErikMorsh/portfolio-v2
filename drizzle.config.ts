@@ -6,8 +6,8 @@ config({ path: '.env.local' })
 export default defineConfig({
   schema: './src/db/schema.ts',
   out: './src/db/migrations',
-  dialect: 'postgresql',
+  dialect: 'sqlite',
   dbCredentials: {
-    url: process.env.POSTGRES_URL!,
+    url: process.env.DATABASE_URL ?? 'file:./data/portfolio.db',
   },
 })

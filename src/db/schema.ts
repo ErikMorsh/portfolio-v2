@@ -1,25 +1,21 @@
-import {
-  pgEnum,
-  pgTable,
-  text,
-  timestamp,
-  uuid,
-} from 'drizzle-orm/pg-core'
+import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 
-export const messageStatusEnum = pgEnum('message_status', ['unread', 'read'])
-
-export const messages = pgTable('messages', {
-  id: uuid('id').defaultRandom().primaryKey(),
+export const messages = sqliteTable('messages', {
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
   firstName: text('first_name').notNull(),
   lastName: text('last_name').notNull().default(''),
   email: text('email').notNull(),
   phone: text('phone'),
   subject: text('subject').notNull(),
   body: text('body').notNull(),
-  status: messageStatusEnum('status').notNull().default('unread'),
-  createdAt: timestamp('created_at', { withTimezone: true })
+  status: text('status', { enum: ['unread', 'read'] })
     .notNull()
-    .defaultNow(),
+    .default('unread'),
+  createdAt: integer('created_at', { mode: 'timestamp_ms' })
+    .notNull()
+    .$defaultFn(() => new Date()),
 })
 
 export type Message = typeof messages.$inferSelect

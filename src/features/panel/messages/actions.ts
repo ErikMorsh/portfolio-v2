@@ -32,6 +32,15 @@ export async function markMessageStatus(id: string, status: 'read' | 'unread') {
   revalidatePath(`/admin/messages/${id}`)
 }
 
+/** Mark unread → read during page load (no revalidatePath — unsafe during render). */
+export async function markMessageReadOnView(id: string) {
+  await requireAdmin()
+  await db
+    .update(messages)
+    .set({ status: 'read' })
+    .where(eq(messages.id, id))
+}
+
 export async function deleteMessage(id: string) {
   await requireAdmin()
   await db.delete(messages).where(eq(messages.id, id))

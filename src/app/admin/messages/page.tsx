@@ -2,6 +2,7 @@ import { auth } from '@/auth'
 import { AdminShell } from '@/features/panel/layout/AdminShell'
 import { countUnread, listMessages } from '@/features/panel/messages/actions'
 import { MessageList } from '@/features/panel/messages/MessageList'
+import { MessagesHeader } from '@/features/panel/messages/MessagesHeader'
 import { redirect } from 'next/navigation'
 
 export default async function AdminMessagesPage() {
@@ -14,7 +15,7 @@ export default async function AdminMessagesPage() {
 
   return (
     <AdminShell email={session.user.email} unreadCount={unreadCount}>
-      <h1 className="messages-page__title">Messages</h1>
+      <MessagesHeader />
       <MessageList items={items} />
     </AdminShell>
   )

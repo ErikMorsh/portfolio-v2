@@ -20,16 +20,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       async authorize(credentials) {
         const parsed = credentialsSchema.safeParse(credentials)
+        
         if (!parsed.success) return null
 
         const adminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase()
         const passwordHash = process.env.ADMIN_PASSWORD_HASH
+        
         if (!adminEmail || !passwordHash) return null
 
         const email = parsed.data.email.toLowerCase()
         if (email !== adminEmail) return null
 
         const valid = await bcrypt.compare(parsed.data.password, passwordHash)
+        
         if (!valid) return null
 
         return {

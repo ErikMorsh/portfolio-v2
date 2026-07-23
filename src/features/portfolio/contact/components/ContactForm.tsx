@@ -12,7 +12,7 @@ type ContactFormState = {
   phone: string
   subject: string
   message: string
-  website: string
+  hp_company: string
 }
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error'
@@ -24,7 +24,7 @@ const initialState: ContactFormState = {
   phone: '',
   subject: '',
   message: '',
-  website: '',
+  hp_company: '',
 }
 
 export function ContactForm() {
@@ -57,17 +57,25 @@ export function ContactForm() {
             form.subject.trim() ||
             pickLocale(contactCopy.form.subjectPlaceholder, locale),
           message: form.message,
-          website: form.website,
+          hp_company: form.hp_company,
         }),
       })
 
+      const data = (await response.json().catch(() => null)) as {
+        error?: string
+        ok?: boolean
+        id?: string
+      } | null
+
       if (!response.ok) {
-        const data = (await response.json().catch(() => null)) as {
-          error?: string
-        } | null
         throw new Error(
           data?.error || pickLocale(contactCopy.form.error, locale),
         )
+      }
+
+      // Real saves return an id; honeypot replies do not
+      if (!data?.id) {
+        throw new Error(pickLocale(contactCopy.form.error, locale))
       }
 
       setForm(initialState)
@@ -89,15 +97,15 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       noValidate
     >
-      {/* Honeypot — hidden from users */}
+      {/* Honeypot — obscure name so browsers/password managers do not autofill */}
       <input
         className="contact-form__honeypot"
         tabIndex={-1}
-        autoComplete="off"
+        autoComplete="new-password"
         aria-hidden
-        name="website"
-        value={form.website}
-        onChange={update('website')}
+        name="hp_company"
+        value={form.hp_company}
+        onChange={update('hp_company')}
       />
 
       <Box className="contact-form__row">
