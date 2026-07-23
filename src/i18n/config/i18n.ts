@@ -5,17 +5,27 @@ import { initReactI18next } from 'react-i18next'
 import { isLocale, type Locale } from '@/shared/types'
 import en from '../locales/en.json'
 import fa from '../locales/fa.json'
-
-const STORAGE_KEY = 'portfolio-locale'
+import {
+  LOCALE_STORAGE_KEY,
+  readLocaleCookie,
+  writeLocaleCookie,
+} from './locale-preference'
 
 const getStoredLocale = (): Locale | null => {
   if (typeof window === 'undefined') return null
-  const stored = localStorage.getItem(STORAGE_KEY)
+  const stored = localStorage.getItem(LOCALE_STORAGE_KEY)
   if (stored && isLocale(stored)) return stored
   return null
 }
 
-const getInitialLocale = (): Locale => getStoredLocale() ?? 'fa'
+const getCookieLocale = (): Locale | null => {
+  if (typeof document === 'undefined') return null
+  return readLocaleCookie(document.cookie)
+}
+
+/** Preference order: explicit localStorage → geo/guest cookie → fa. */
+const getInitialLocale = (): Locale =>
+  getStoredLocale() ?? getCookieLocale() ?? 'fa'
 
 if (!i18n.isInitialized) {
   void i18n.use(initReactI18next).init({
@@ -33,7 +43,8 @@ if (!i18n.isInitialized) {
 
 export const setAppLocale = (locale: Locale) => {
   if (typeof window !== 'undefined') {
-    localStorage.setItem(STORAGE_KEY, locale)
+    localStorage.setItem(LOCALE_STORAGE_KEY, locale)
+    writeLocaleCookie(locale)
     document.documentElement.lang = locale
     document.documentElement.dir = locale === 'fa' ? 'rtl' : 'ltr'
   }
