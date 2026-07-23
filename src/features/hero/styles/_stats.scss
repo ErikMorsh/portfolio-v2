@@ -21,9 +21,9 @@
   &__value {
     margin: 0;
     font-family: 'Syne', 'Vazirmatn', sans-serif;
-    font-size: clamp(1.65rem, 3vw, 2.25rem);
-    font-weight: 800;
-    line-height: 1;
+    font-size: clamp(2rem, 3.6vw, 2.75rem) !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
     letter-spacing: -0.03em;
     color: var(--hero-ink);
 
@@ -35,7 +35,7 @@
   &__label {
     margin: 0;
     color: var(--hero-muted);
-    font-size: 0.85rem;
+    font-size: 0.95rem !important;
     line-height: 1.35;
   }
 

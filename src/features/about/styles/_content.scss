@@ -1,0 +1,91 @@
+@use '@/shared/styles/variables' as *;
+@use 'tokens' as *;
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-4;
+  min-width: 0;
+
+  &__eyebrow {
+    margin: 0;
+    color: var(--about-accent);
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  &__headline {
+    margin: 0;
+    max-width: 14ch;
+    font-family: 'Syne', 'Vazirmatn', sans-serif;
+    font-size: clamp(2.35rem, 5vw, 3.6rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.03em;
+    color: var(--about-ink);
+  }
+
+  &__headline-accent {
+    color: var(--about-accent);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    max-width: 58ch;
+  }
+
+  &__paragraph {
+    margin: 0;
+    color: var(--about-muted);
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+  }
+
+  &__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: $space-2 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__skill {
+    padding: 0.45rem 0.9rem;
+    border: 1px solid rgba(226, 220, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(226, 220, 255, 0.82);
+    font-size: 0.82rem;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 900px) {
+    align-items: center;
+
+    &__headline {
+      max-width: 18ch;
+    }
+
+    &__body {
+      max-width: 48ch;
+    }
+
+    &__skills {
+      justify-content: center;
+    }
+  }
+}
+
+[dir='rtl'] .about-content {
+  align-items: flex-start;
+
+  @media (max-width: 900px) {
+    align-items: center;
+  }
+}

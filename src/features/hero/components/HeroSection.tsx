@@ -10,6 +10,7 @@ export function HeroSection() {
       <Box className="hero__shell">
         <HeroNav />
         <Box className="hero__stage">
+          <span className="hero__stage-glow" aria-hidden />
           <HeroContent />
           <HeroPortrait />
         </Box>

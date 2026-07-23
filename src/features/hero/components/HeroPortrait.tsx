@@ -24,8 +24,7 @@ export function HeroPortrait() {
   const projectsStat = heroStats.find((stat) => stat.id === 'projects')
 
   return (
-    <Box className="hero-portrait" aria-hidden={false}>
-      <span className="hero-portrait__glow" aria-hidden />
+      <Box className="hero-portrait" aria-hidden={false}>
       {projectsStat ? (
         <Box className="hero-portrait__badge hero-portrait__badge--top" component="aside">
           <RocketLaunchRoundedIcon className="hero-portrait__badge-icon" fontSize="small" />
@@ -47,22 +46,14 @@ export function HeroPortrait() {
         />
       </Box>
       {yearsStat ? (
-        <Box
-          className="hero-portrait__badge hero-portrait__badge--bottom hero-portrait__badge--compact"
-          component="aside"
-        >
+        <Box className="hero-portrait__badge hero-portrait__badge--bottom" component="aside">
           <EmojiEventsRoundedIcon className="hero-portrait__badge-icon" fontSize="small" />
           <Box className="hero-portrait__badge-copy">
             <Typography className="hero-portrait__badge-value" component="p">
               {formatStatValue(yearsStat.value)}
-              {yearsStat.unit ? (
-                <span className="hero-portrait__badge-unit">
-                  {pickLocale(yearsStat.unit, locale)}
-                </span>
-              ) : null}
             </Typography>
             <Typography className="hero-portrait__badge-label" component="p">
-              {pickLocale(yearsStat.caption ?? yearsStat.label, locale)}
+              {pickLocale(yearsStat.label, locale)}
             </Typography>
           </Box>
         </Box>

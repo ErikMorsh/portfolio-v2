@@ -1,0 +1,44 @@
+@use 'tokens' as *;
+
+.about {
+  --about-accent: #{$about-accent};
+  --about-accent-soft: #{$about-accent-soft};
+  --about-accent-border: #{$about-accent-border};
+  --about-ink: #{$about-ink};
+  --about-muted: #{$about-muted};
+  --about-surface: #{$about-surface};
+  --about-card: #{$about-card};
+  --about-status: #{$about-status};
+
+  position: relative;
+  isolation: isolate;
+  scroll-margin-top: 1.5rem;
+  color: var(--about-ink);
+  background: var(--about-surface);
+  overflow: visible;
+
+  &__shell {
+    width: min(#{$about-max}, calc(100% - 2.5rem));
+    margin-inline: auto;
+    padding-block: clamp(4rem, 10vh, 6.5rem);
+  }
+
+  &__stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(260px, 0.9fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+
+  @media (max-width: 900px) {
+    &__shell {
+      width: min(#{$about-max}, calc(100% - 1.5rem));
+    }
+
+    &__stage {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+  }
+}

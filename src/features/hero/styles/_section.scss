@@ -32,12 +32,36 @@
   }
 
   &__stage {
+    position: relative;
     flex: 1;
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     align-items: center;
     gap: clamp(2rem, 5vw, 4rem);
     overflow: visible;
+
+    > :not(.hero__stage-glow) {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  &__stage-glow {
+    position: absolute;
+    top: -18%;
+    left: -12%;
+    width: min(62%, 520px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(167, 139, 250, 0.42) 0%,
+      rgba(167, 139, 250, 0.18) 38%,
+      transparent 72%
+    );
+    filter: blur(48px);
+    z-index: 0;
+    pointer-events: none;
   }
 
   @media (max-width: 900px) {

@@ -42,34 +42,37 @@
   &__first-name {
     display: block;
     color: var(--hero-ink);
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
+    font-size: 5.25rem;
   }
 
   &__last-name {
     display: block;
     color: var(--hero-accent);
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
+    font-size: 5.25rem;
   }
 
   &__tagline {
     margin: 0;
-    max-width: 34ch;
+    max-width: 80%;
     color: var(--hero-muted);
-    font-size: clamp(1rem, 2vw, 1.15rem);
-    font-weight: 500;
-    line-height: 1.45;
+    
+  }
+
+  &__tagline-typed {
+    display: inline;
+
+    &::after {
+      content: '|';
+      margin-inline-start: 0.12em;
+      color: var(--hero-accent);
+      animation: hero-cursor-blink 0.9s step-end infinite;
+    }
   }
 
   &__description {
     margin: 0;
-    max-width: 42ch;
-    color: rgba(226, 220, 255, 0.62);
-    font-size: 1rem;
-    line-height: 1.7;
+    max-width: 70%;
+    color: var(--hero-muted);
   }
 
   &__actions {
@@ -152,7 +155,18 @@
     border-color: rgba(167, 139, 250, 0.22);
   }
 
-  50% {
+  40% {
     border-color: rgba(167, 139, 250, 0.58);
+  }
+}
+
+@keyframes hero-cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
   }
 }

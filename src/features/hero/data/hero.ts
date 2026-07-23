@@ -36,10 +36,16 @@ export const heroCopy = {
     fa: 'مرشدزاده',
     en: 'Morshedzadeh',
   },
-  tagline: {
-    fa: 'ساخت تجربه‌های وب سریع، تمیز و قابل اتکا',
-    en: 'Building fast, clean, and reliable web experiences',
-  },
+  taglines: [
+    {
+      fa: 'ساخت تجربه‌های وب سریع، تمیز و قابل اتکا',
+      en: 'Building fast, clean, and reliable web experiences',
+    },
+    {
+      fa: 'تبدیل ایده‌های پیچیده به رابط‌های خوانا و قابل نگهداری',
+      en: 'Turning complex ideas into clean, maintainable interfaces',
+    },
+  ],
   description: {
     fa: 'ایده‌های پیچیده را به رابط‌های خوانا و قابل نگهداری تبدیل می‌کنم — با تمرکز روی معماری فرانت‌اند و تجربه کاربری.',
     en: 'I turn complex ideas into clean, maintainable interfaces — focused on frontend architecture and user experience.',

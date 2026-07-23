@@ -6,6 +6,7 @@ import { personal, pickLocale } from '@/cv-data'
 import { useAppTheme } from '@/theme'
 import { heroCopy } from '../data/hero'
 import { HeroStats } from './HeroStats'
+import { HeroTagline } from './HeroTagline'
 
 export function HeroContent() {
   const { t } = useTranslation()
@@ -27,9 +28,7 @@ export function HeroContent() {
         </span>
       </Typography>
 
-      <Typography className="hero-content__tagline" component="p">
-        {pickLocale(heroCopy.tagline, locale)}
-      </Typography>
+      <HeroTagline />
 
       <Typography className="hero-content__description" component="p">
         {pickLocale(heroCopy.description, locale)}

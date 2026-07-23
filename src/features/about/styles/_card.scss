@@ -1,0 +1,120 @@
+@use 'tokens' as *;
+
+.about-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 320px);
+  margin-inline: auto;
+  padding: 2rem 1.5rem 1.5rem;
+  border: 1px solid rgba(226, 220, 255, 0.1);
+  border-radius: 1.35rem;
+  background: var(--about-card);
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  text-align: center;
+  animation: about-card-float 7s ease-in-out infinite;
+
+  &__portrait {
+    width: 148px;
+    height: 148px;
+    margin-bottom: 1.25rem;
+    padding: 0.35rem;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(226, 220, 255, 0.55);
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    background: #1a1628;
+  }
+
+  &__name {
+    margin: 0;
+    font-family: 'Syne', 'Vazirmatn', sans-serif;
+    font-size: 1.35rem !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    color: var(--about-ink);
+  }
+
+  &__role {
+    margin: 0.35rem 0 0;
+    color: var(--about-accent);
+    font-size: 0.98rem !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+  }
+
+  &__stack {
+    margin: 0.35rem 0 0;
+    color: rgba(226, 220, 255, 0.55);
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    width: 100%;
+    margin-top: 1.35rem;
+  }
+
+  &__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    width: 100%;
+    margin: 0;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid rgba(226, 220, 255, 0.08);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(226, 220, 255, 0.86);
+    font-size: 0.84rem;
+    line-height: 1.2;
+  }
+
+  &__pill-icon {
+    font-size: 1rem !important;
+  }
+
+  &__pill-icon--pin {
+    color: #f87171;
+  }
+
+  &__status-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--about-status);
+    box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.18);
+  }
+}
+
+@keyframes about-card-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-card {
+    animation: none;
+  }
+}
