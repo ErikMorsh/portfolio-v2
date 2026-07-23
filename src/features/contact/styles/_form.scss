@@ -1,0 +1,105 @@
+@use 'tokens' as *;
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.35rem 1.3rem 1.25rem;
+  border: 1px solid rgba(226, 220, 255, 0.1);
+  border-radius: 1.15rem;
+  background: var(--contact-card);
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+
+  &__label {
+    color: rgba(226, 220, 255, 0.7);
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    border: 1px solid rgba(226, 220, 255, 0.12);
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--contact-ink);
+    font: inherit;
+    outline: none;
+    transition:
+      border-color 180ms $contact-ease,
+      background-color 180ms $contact-ease;
+
+    &::placeholder {
+      color: rgba(226, 220, 255, 0.35);
+    }
+
+    &:focus {
+      border-color: rgba(167, 139, 250, 0.55);
+      background: rgba(167, 139, 250, 0.06);
+    }
+  }
+
+  &__input {
+    min-height: 2.75rem;
+    padding: 0.7rem 0.9rem;
+  }
+
+  &__textarea {
+    min-height: 9rem;
+    padding: 0.85rem 0.9rem;
+    resize: vertical;
+  }
+
+  &__phone {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.55rem;
+    align-items: stretch;
+  }
+
+  &__country {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.85rem;
+    border: 1px solid rgba(226, 220, 255, 0.12);
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(226, 220, 255, 0.72);
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  &__submit {
+    align-self: stretch;
+    min-height: 2.9rem !important;
+    margin-top: 0.25rem;
+    border-radius: 0.85rem !important;
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    text-transform: none !important;
+    box-shadow: 0 10px 24px rgba(124, 58, 237, 0.28) !important;
+
+    &:hover {
+      background: linear-gradient(135deg, #9b6cff, #8b5cf6) !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    &__row {
+      grid-template-columns: 1fr;
+    }
+  }
+}
