@@ -1,5 +1,8 @@
+'use client'
+
 import { Box, Typography } from '@mui/material'
 import { pickLocale } from '@/cv-data'
+import { Reveal, RevealGroup, RevealItem } from '@/shared/motion'
 import { useAppTheme } from '@/theme'
 import { projectsCopy, projectsShowcase } from '../data/projects'
 import { ProjectsCard } from './ProjectsCard'
@@ -11,7 +14,7 @@ export function ProjectsSection() {
   return (
     <Box className="projects" component="section" id="projects">
       <Box className="projects__shell">
-        <Box className="projects__header">
+        <Reveal className="projects__header">
           <Typography className="projects__eyebrow" component="p">
             {pickLocale(projectsCopy.eyebrow, locale)}
           </Typography>
@@ -21,13 +24,15 @@ export function ProjectsSection() {
           <Typography className="projects__subtitle" component="p">
             {pickLocale(projectsCopy.subtitle, locale)}
           </Typography>
-        </Box>
+        </Reveal>
 
-        <Box className="projects__grid" component="ul">
+        <RevealGroup className="projects__grid" as="ul" stagger={0.07}>
           {projectsShowcase.map((item) => (
-            <ProjectsCard key={item.id} item={item} />
+            <RevealItem key={item.id} as="li">
+              <ProjectsCard item={item} />
+            </RevealItem>
           ))}
-        </Box>
+        </RevealGroup>
       </Box>
     </Box>
   )

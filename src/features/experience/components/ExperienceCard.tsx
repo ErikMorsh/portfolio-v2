@@ -20,7 +20,7 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
   const detailHref = jobPaths.detail(job.id)
 
   return (
-    <Box className="experience-card" component="li">
+    <Box className="experience-card">
       <span className="experience-card__dot" aria-hidden />
 
       <Box className="experience-card__panel">

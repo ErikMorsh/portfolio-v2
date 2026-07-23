@@ -1,5 +1,8 @@
+'use client'
+
 import { Box, Typography } from '@mui/material'
 import { pickLocale } from '@/cv-data'
+import { Reveal, RevealGroup, RevealItem } from '@/shared/motion'
 import { useAppTheme } from '@/theme'
 import { contactCopy } from '../data/contact'
 import { ContactForm } from './ContactForm'
@@ -12,7 +15,7 @@ export function ContactSection() {
   return (
     <Box className="contact" component="section" id="contact">
       <Box className="contact__shell">
-        <Box className="contact__header">
+        <Reveal className="contact__header">
           <Typography className="contact__eyebrow" component="p">
             {pickLocale(contactCopy.eyebrow, locale)}
           </Typography>
@@ -25,12 +28,16 @@ export function ContactSection() {
           <Typography className="contact__subtitle" component="p">
             {pickLocale(contactCopy.subtitle, locale)}
           </Typography>
-        </Box>
+        </Reveal>
 
-        <Box className="contact__stage">
-          <ContactInfo />
-          <ContactForm />
-        </Box>
+        <RevealGroup className="contact__stage">
+          <RevealItem>
+            <ContactInfo />
+          </RevealItem>
+          <RevealItem>
+            <ContactForm />
+          </RevealItem>
+        </RevealGroup>
       </Box>
     </Box>
   )

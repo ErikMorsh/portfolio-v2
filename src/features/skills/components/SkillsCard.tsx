@@ -13,7 +13,7 @@ export function SkillsCard({ item }: SkillsCardProps) {
   const name = pickLocale(item.name, locale)
 
   return (
-    <Box className="skills-card" component="li">
+    <Box className="skills-card">
       <SkillIcons
         className="skills-card__icon"
         icons={[item.icon]}

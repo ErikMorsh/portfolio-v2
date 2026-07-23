@@ -30,7 +30,6 @@ export function ProjectsCard({ item }: ProjectsCardProps) {
       ]
         .filter(Boolean)
         .join(' ')}
-      component="li"
     >
       <Box className="projects-card__top">
         <span className="projects-card__icon" aria-hidden>
