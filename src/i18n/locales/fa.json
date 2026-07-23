@@ -48,7 +48,11 @@
     "viewDetails": "مشاهده جزئیات"
   },
   "hero": {
-    "resumeAria": "دانلود رزومه",
+    "resumeAria": "مشاهده رزومه",
+    "resumeDownload": "دانلود",
+    "resumeDownloadAria": "دانلود فایل رزومه",
+    "resumeLoading": "در حال بارگذاری…",
+    "resumeLoadError": "بارگذاری رزومه ممکن نشد.",
     "statsLabel": "نکات برجسته شغلی",
     "nav": {
       "label": "منوی اصلی",

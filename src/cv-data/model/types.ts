@@ -21,7 +21,10 @@ export interface PersonalInfo {
   }
   /** Replace `public/resume.pdf` with your real CV file. */
   resume: {
+    /** In-app viewer route (opens in a new tab). */
     href: string
+    /** Extensionless PDF route (avoids IDM intercepting *.pdf). */
+    pdfSrc: string
     fileName: string
   }
 }

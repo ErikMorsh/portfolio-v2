@@ -22,7 +22,9 @@ export const personal: PersonalInfo = {
     username: 'ErfanMorshedzadeh',
   },
   resume: {
-    href: '/resume.pdf',
+    href: '/resume',
+    // Extensionless path — avoids IDM/chrome download interceptors on *.pdf URLs.
+    pdfSrc: '/resume-file',
     fileName: 'Erfan-Morshedzadeh-Resume.pdf',
   },
 }

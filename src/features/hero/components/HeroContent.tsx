@@ -1,7 +1,8 @@
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded'
-import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded'
+import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded'
 import { Box, Button, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import { Link as RouterLink } from 'react-router-dom'
 import { personal, pickLocale } from '@/cv-data'
 import { useAppTheme } from '@/theme'
 import { heroCopy } from '../data/hero'
@@ -46,11 +47,12 @@ export function HeroContent() {
         </Button>
         <Button
           className="hero-content__cta-secondary"
-          component="a"
-          href={personal.resume.href}
-          download={personal.resume.fileName}
+          component={RouterLink}
+          to={personal.resume.href}
+          target="_blank"
+          rel="noopener noreferrer"
           variant="outlined"
-          startIcon={<DownloadRoundedIcon />}
+          startIcon={<OpenInNewRoundedIcon />}
           aria-label={t('hero.resumeAria')}
         >
           {pickLocale(heroCopy.resume, locale)}
