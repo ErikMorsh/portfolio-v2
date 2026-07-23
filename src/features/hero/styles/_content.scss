@@ -53,7 +53,7 @@
 
   &__tagline {
     margin: 0;
-    max-width: 80%;
+    width: 80%;
     color: var(--hero-muted);
     
   }
@@ -120,7 +120,7 @@
 
     &__tagline,
     &__description {
-      max-width: 48ch;
+      width: 80%;
     }
 
     &__actions {

@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next'
 import { personal, pickLocale } from '@/cv-data'
 import { useAppTheme } from '@/theme'
 import { heroCopy } from '../data/hero'
-import { HeroStats } from './HeroStats'
 import { HeroTagline } from './HeroTagline'
 
 const fadeUp = {
@@ -56,7 +55,7 @@ export function HeroContent() {
         </Typography>
       </motion.div>
 
-      <motion.div variants={fadeUp} transition={{ duration: 0.45, ease }}>
+      <motion.div variants={fadeUp} transition={{ duration: 0.45, ease }} style={{ width: '80%' }}>
         <HeroTagline />
       </motion.div>
 
@@ -93,10 +92,6 @@ export function HeroContent() {
         >
           {pickLocale(heroCopy.resume, locale)}
         </Button>
-      </motion.div>
-
-      <motion.div variants={fadeUp} transition={{ duration: 0.5, ease }}>
-        <HeroStats />
       </motion.div>
     </motion.div>
   )

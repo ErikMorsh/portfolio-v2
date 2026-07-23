@@ -58,6 +58,10 @@ export const heroCopy = {
     fa: 'رزومه',
     en: 'Resume',
   },
+  scrollExplore: {
+    fa: 'اسکرول برای کاوش',
+    en: 'Scroll to explore',
+  },
 } as const
 
 export const heroStats: HeroStat[] = [

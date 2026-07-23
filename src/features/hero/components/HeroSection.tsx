@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 import { HeroContent } from './HeroContent'
 import { HeroPortrait } from './HeroPortrait'
+import { HeroScrollHint } from './HeroScrollHint'
 import '../styles/hero.scss'
 
 export function HeroSection() {
@@ -11,6 +12,7 @@ export function HeroSection() {
           <HeroContent />
           <HeroPortrait />
         </Box>
+        <HeroScrollHint />
       </Box>
     </Box>
   )

@@ -1,0 +1,51 @@
+@use 'tokens' as *;
+
+.hero-scroll-hint {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 1.25rem;
+  z-index: 2;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  width: fit-content;
+  margin-inline: auto;
+  color: var(--hero-muted);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 600;
+  transition: color 200ms $hero-ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--hero-accent);
+    outline: none;
+  }
+
+  &__label {
+    opacity: 1;
+  }
+
+  &__arrow {
+    font-size: 1.35rem !important;
+    animation: hero-scroll-bounce 1.6s $hero-ease infinite;
+  }
+
+  @media (max-width: 900px) {
+    bottom: 0.85rem;
+  }
+}
+
+@keyframes hero-scroll-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
