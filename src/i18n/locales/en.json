@@ -64,7 +64,8 @@
     }
   },
   "about": {
-    "skillsLabel": "Core skills"
+    "skillsLabel": "Core skills",
+    "mapBack": "Back to profile card"
   },
   "nav": {
     "home": "Home",

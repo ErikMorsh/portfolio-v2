@@ -1,20 +1,93 @@
 @use 'tokens' as *;
 
-.about-card {
+.about-card-scene {
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 20rem;
+  margin-inline: auto;
+  perspective: 1400px;
+  animation: about-card-float 7s ease-in-out infinite;
+
+  &--flipped {
+    animation: none;
+  }
+
+  &--flipped .about-card-flip {
+    transform: rotateY(180deg);
+  }
+
+  &--flipped .about-card--front {
+    pointer-events: none;
+  }
+
+  &--flipped .about-card--back {
+    pointer-events: auto;
+  }
+
+  /* Flatten 3D after flip so Leaflet can size tiles correctly (esp. mobile). */
+  &--map-settled {
+    perspective: none;
+
+    .about-card-flip {
+      transform: none;
+      transition: none;
+    }
+
+    .about-card--front {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    .about-card--back {
+      transform: none;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &--no-transition .about-card-flip {
+    transition: none !important;
+  }
+}
+
+.about-card-flip {
+  position: relative;
+  width: 100%;
+  min-height: 28.5rem;
+  transform-style: preserve-3d;
+  transition: transform 620ms $about-ease;
+}
+
+.about-card {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
+  gap: .65rem;
   align-items: center;
-  width: min(100%, 320px);
-  margin-inline: auto;
+  width: 100%;
+  min-height: 28.5rem;
   padding: 2rem 1.5rem 1.5rem;
   border: 1px solid var(--app-border);
   border-radius: 1.35rem;
   background: var(--about-card);
   box-shadow: var(--app-shadow);
   text-align: center;
-  animation: about-card-float 7s ease-in-out infinite;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  &--front {
+    pointer-events: auto;
+  }
+
+  &--back {
+    transform: rotateY(180deg);
+    padding: 0.9rem;
+    align-items: stretch;
+    text-align: start;
+    pointer-events: none;
+  }
 
   &__portrait {
     width: 148px;
@@ -78,8 +151,32 @@
     border-radius: 999px;
     background: var(--app-input-bg);
     color: var(--app-ink);
+    font: inherit;
     font-size: 0.84rem;
     line-height: 1.2;
+  }
+
+  &__pill--location {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition:
+      border-color 180ms $about-ease,
+      background-color 180ms $about-ease,
+      transform 180ms $about-ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--about-accent-border);
+      background: var(--about-accent-soft);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      cursor: default;
+      opacity: 1;
+    }
   }
 
   &__pill-icon {
@@ -98,6 +195,71 @@
     background: var(--about-status);
     box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.18);
   }
+
+  &__map-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    flex-shrink: 0;
+    margin-bottom: 0.65rem;
+  }
+
+  &__back-btn {
+    border: 1px solid var(--app-border) !important;
+    border-radius: 0.75rem !important;
+    color: var(--about-ink) !important;
+    background: var(--app-input-bg) !important;
+
+    &:hover {
+      border-color: var(--about-accent-border) !important;
+      background: var(--about-accent-soft) !important;
+    }
+  }
+
+  &__map-title {
+    margin: 0;
+    color: var(--about-ink);
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+  }
+
+  &__map-shell {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 18rem;
+    height: 18rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid var(--app-border);
+    background: var(--app-media-bg);
+  }
+
+  &__map {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    background: var(--app-media-bg);
+
+    &.leaflet-container,
+    .leaflet-container {
+      width: 100%;
+      height: 100%;
+      font: inherit;
+      background: var(--app-media-bg);
+    }
+
+    &--loading {
+      display: grid;
+      place-items: center;
+    }
+  }
+}
+
+[dir='rtl'] .about-card__back-btn svg {
+  transform: scaleX(-1);
 }
 
 @keyframes about-card-float {
@@ -111,8 +273,32 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 900px) {
+  .about-card-scene {
+    max-width: 22rem;
+  }
+
+  .about-card-flip,
   .about-card {
+    min-height: 26.5rem;
+  }
+
+  .about-card--back {
+    padding: 0.75rem;
+  }
+
+  .about-card__map-shell {
+    min-height: 16rem;
+    height: 16rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-card-scene {
     animation: none;
+  }
+
+  .about-card-flip {
+    transition: none;
   }
 }

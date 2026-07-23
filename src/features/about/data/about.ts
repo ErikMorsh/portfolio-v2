@@ -33,6 +33,10 @@ export const aboutCopy = {
     fa: 'آماده همکاری',
     en: 'Open to opportunities',
   },
+  showLocationMap: {
+    fa: 'نمایش نقشه تهران',
+    en: 'Show Tehran on the map',
+  },
   skillPills: [
     'Vue.js',
     'Nuxt.js',
