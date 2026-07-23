@@ -4,7 +4,7 @@ import { ExperienceSection } from '@/features/experience'
 import { HeroSection } from '@/features/hero'
 import { ProjectsSection } from '@/features/projects'
 import { SkillsSection } from '@/features/skills'
-import { Page } from '@/shared/layout'
+import { Page, SiteFooter } from '@/shared/layout'
 
 export function WelcomeLayout() {
   return (
@@ -15,6 +15,7 @@ export function WelcomeLayout() {
       <ProjectsSection />
       <ExperienceSection />
       <ContactSection />
+      <SiteFooter />
     </Page>
   )
 }
