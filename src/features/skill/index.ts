@@ -1,2 +1,2 @@
-export { SkillCard, SkillDetailContent, SkillList } from './components'
+export { SkillCard, SkillDetailContent, SkillIcons, SkillList } from './components'
 export { getAllSkills, getSkillById, skillPaths, type Skill } from './lib/skills'

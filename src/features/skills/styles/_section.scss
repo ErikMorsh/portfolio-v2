@@ -1,0 +1,106 @@
+@use 'tokens' as *;
+
+.skills {
+  --skills-accent: #{$skills-accent};
+  --skills-ink: #{$skills-ink};
+  --skills-muted: #{$skills-muted};
+  --skills-surface: #{$skills-surface};
+  --skills-card: #{$skills-card};
+
+  position: relative;
+  isolation: isolate;
+  scroll-margin-top: 1.5rem;
+  color: var(--skills-ink);
+  background: var(--skills-surface);
+
+  &__shell {
+    width: min(#{$skills-max}, calc(100% - 2.5rem));
+    margin-inline: auto;
+    padding-block: clamp(4rem, 10vh, 6.5rem);
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-bottom: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  &__eyebrow {
+    margin: 0;
+    color: var(--skills-accent);
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: 'Syne', 'Vazirmatn', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.03em;
+    color: var(--skills-ink);
+  }
+
+  &__subtitle {
+    margin: 0;
+    max-width: 42ch;
+    color: var(--skills-muted);
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 1100px) {
+    &__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    &__shell {
+      width: min(#{$skills-max}, calc(100% - 1.5rem));
+    }
+
+    &__header {
+      align-items: center;
+      text-align: center;
+    }
+
+    &__subtitle {
+      max-width: 48ch;
+    }
+  }
+
+  @media (max-width: 640px) {
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}
+
+[dir='rtl'] .skills {
+  &__header {
+    align-items: flex-start;
+    text-align: start;
+  }
+
+  @media (max-width: 900px) {
+    &__header {
+      align-items: center;
+      text-align: center;
+    }
+  }
+}
