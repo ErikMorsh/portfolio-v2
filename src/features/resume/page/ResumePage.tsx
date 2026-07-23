@@ -6,8 +6,7 @@ import { personal } from '@/cv-data'
 import '../styles/resume-page.scss'
 
 function resolvePublicUrl(path: string) {
-  const base = import.meta.env.BASE_URL || '/'
-  return `${base}${path.replace(/^\//, '')}`.replace(/([^:]\/)\/+/g, '$1')
+  return path.startsWith('/') ? path : `/${path}`
 }
 
 export function ResumePage() {

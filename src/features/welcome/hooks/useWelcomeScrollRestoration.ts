@@ -1,12 +1,12 @@
 import { useLayoutEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { usePathname } from 'next/navigation'
 
 const scrollTo = (top: number) => {
   window.scrollTo({ top, left: 0, behavior: 'auto' })
 }
 
 export function useWelcomeScrollRestoration(isDetailOpen: boolean) {
-  const { pathname } = useLocation()
+  const pathname = usePathname()
   const savedScrollYRef = useRef(0)
   const wasDetailOpenRef = useRef(false)
   const previousPathnameRef = useRef(pathname)

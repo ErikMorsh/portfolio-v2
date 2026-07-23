@@ -1,8 +1,8 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
 import { Box, Breadcrumbs, Link as MuiLink, Typography } from '@mui/material'
+import Link from 'next/link'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 
 export type PanelBreadcrumbItem = {
   label: string
@@ -32,7 +32,7 @@ export function Main2Toolbar({ backTo, items }: Main2ToolbarProps) {
               <MuiLink
                 key={`${item.label}-${index}`}
                 component={Link}
-                to={item.to}
+                href={item.to}
                 underline="hover"
                 variant="body2"
                 color="inherit"
@@ -58,7 +58,7 @@ export function Main2Toolbar({ backTo, items }: Main2ToolbarProps) {
       <MuiLink
         className="job-page__back"
         component={Link}
-        to={backTo}
+        href={backTo}
         underline="hover"
         variant="body2"
       >

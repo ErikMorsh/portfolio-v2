@@ -17,4 +17,5 @@ export const cvData: CvData = {
 
 export * from './model/types'
 export * from './lib/localize'
+export { assetSrc } from './lib/assetSrc'
 export { abilities, about, experience, personal, projects, skills }

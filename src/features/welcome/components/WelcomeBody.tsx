@@ -1,25 +1,20 @@
 import { Box } from '@mui/material'
-import { Outlet, useMatch } from 'react-router-dom'
+import { usePathname } from 'next/navigation'
 import { useWelcomeScrollRestoration } from '../hooks/useWelcomeScrollRestoration'
 import { WelcomeMain } from './WelcomeMain'
 import { WelcomePortfolioSource } from './WelcomePortfolioSource'
 import { WelcomeSidebar } from './WelcomeSidebar'
 
 export function WelcomeBody() {
-  const projectDetailMatch = useMatch('/:jobId/:projectId')
-  const skillDetailMatch = useMatch('/skills/:skillId')
-  const jobDetailMatch = useMatch('/:jobId')
+  const pathname = usePathname()
+  const segments = pathname.split('/').filter(Boolean)
 
-  const isSkillDetail = Boolean(skillDetailMatch)
-  const isProjectDetail = Boolean(
-    projectDetailMatch && projectDetailMatch.params.jobId !== 'skills',
-  )
-  const isJobDetail = Boolean(
-    jobDetailMatch &&
-      !isSkillDetail &&
-      !isProjectDetail &&
-      jobDetailMatch.params.jobId !== 'skills',
-  )
+  const isSkillDetail = segments[0] === 'skills' && Boolean(segments[1])
+  const isProjectDetail =
+    segments.length >= 2 && segments[0] !== 'skills' && segments[0] !== 'jobs'
+  const isJobDetail =
+    segments.length === 1 &&
+    !['skills', 'jobs', 'resume'].includes(segments[0] ?? '')
   const isDetailOpen = isJobDetail || isProjectDetail || isSkillDetail
 
   useWelcomeScrollRestoration(isDetailOpen)
@@ -45,9 +40,7 @@ export function WelcomeBody() {
         className="welcome__main2"
         component="section"
         aria-hidden={!isDetailOpen}
-      >
-        <Outlet />
-      </Box>
+      />
     </Box>
   )
 }

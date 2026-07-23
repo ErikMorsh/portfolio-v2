@@ -1,7 +1,8 @@
 import { Box, Chip, Paper, Typography } from '@mui/material'
 import '../styles/project.scss'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Navigate, useParams } from 'react-router-dom'
+import { useParams, useRouter } from 'next/navigation'
 import { pickLocale, pickLocaleList } from '@/cv-data'
 import { getJobById, jobPaths } from '@/features/job'
 import { Main2Toolbar } from '@/features/welcome/components'
@@ -11,17 +12,22 @@ import { getProjectById } from '../lib/projects'
 export function ProjectDetailContent() {
   const { t } = useTranslation()
   const { locale } = useAppTheme()
-  const { jobId, projectId } = useParams<{ jobId: string; projectId: string }>()
+  const router = useRouter()
+  const params = useParams<{ jobId?: string; projectId?: string }>()
+  const jobId = typeof params.jobId === 'string' ? params.jobId : undefined
+  const projectId = typeof params.projectId === 'string' ? params.projectId : undefined
 
-  if (!jobId || !projectId) {
-    return <Navigate to="/" replace />
-  }
+  const job = jobId ? getJobById(jobId) : undefined
+  const project = projectId ? getProjectById(projectId) : undefined
+  const isValid =
+    Boolean(jobId && projectId && job && project && job.relatedProjectIds?.includes(projectId))
 
-  const job = getJobById(jobId)
-  const project = getProjectById(projectId)
+  useEffect(() => {
+    if (!isValid) router.replace('/')
+  }, [isValid, router])
 
-  if (!job || !project || !job.relatedProjectIds?.includes(projectId)) {
-    return <Navigate to="/" replace />
+  if (!jobId || !projectId || !job || !project || !job.relatedProjectIds?.includes(projectId)) {
+    return null
   }
 
   const actions = pickLocaleList(project.actions, locale)

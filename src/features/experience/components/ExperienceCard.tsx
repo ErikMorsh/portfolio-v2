@@ -1,6 +1,6 @@
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import { Box, Typography } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import Link from 'next/link'
 import { pickLocale } from '@/cv-data'
 import { getJobById, jobPaths } from '@/features/job'
 import { useAppTheme } from '@/theme'
@@ -44,8 +44,8 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
         <Box className="experience-card__company-row">
           <Typography
             className="experience-card__company"
-            component={RouterLink}
-            to={detailHref}
+            component={Link}
+            href={detailHref}
           >
             {company}
           </Typography>

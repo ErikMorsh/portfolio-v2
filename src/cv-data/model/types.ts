@@ -12,7 +12,8 @@ export interface PersonalInfo {
   age: number
   militaryService: LocalizedString
   profilePhoto: {
-    src: string
+    /** URL string or Next/Vite static import object. */
+    src: string | { src: string }
     alt: LocalizedString
   }
   linkedin: {
@@ -43,7 +44,7 @@ export interface ExperienceItem {
   highlights: LocalizedString[]
   relatedProjectIds?: string[]
   logo: {
-    src: string
+    src: string | { src: string }
     alt: LocalizedString
   }
   techStack: string[]

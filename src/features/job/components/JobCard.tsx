@@ -1,7 +1,7 @@
 import { Box, Chip, Paper, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
-import { pickLocale } from '@/cv-data'
+import { useParams, useRouter } from 'next/navigation'
+import { assetSrc, pickLocale } from '@/cv-data'
 import { useAppTheme } from '@/theme'
 import { jobPaths, type Job } from '../lib/jobs'
 
@@ -11,15 +11,17 @@ type JobCardProps = {
 
 export function JobCard({ job }: JobCardProps) {
   const { t } = useTranslation()
-  const navigate = useNavigate()
-  const { jobId, projectId } = useParams<{ jobId: string; projectId?: string }>()
+  const router = useRouter()
+  const params = useParams<{ jobId?: string; projectId?: string }>()
+  const jobId = typeof params.jobId === 'string' ? params.jobId : undefined
+  const projectId = typeof params.projectId === 'string' ? params.projectId : undefined
   const { locale } = useAppTheme()
   const isSelected = jobId === job.id
   const isDetailMode = Boolean(jobId) && !projectId
   const displayName = pickLocale(isDetailMode ? job.title : job.company, locale)
 
   const openDetail = () => {
-    navigate(jobPaths.detail(job.id))
+    router.push(jobPaths.detail(job.id))
   }
 
   return (
@@ -42,7 +44,7 @@ export function JobCard({ job }: JobCardProps) {
         <Box className="job-card__logo-wrap">
           <img
             className="job-card__logo"
-            src={job.logo.src}
+            src={assetSrc(job.logo.src)}
             alt={pickLocale(job.logo.alt, locale)}
           />
         </Box>

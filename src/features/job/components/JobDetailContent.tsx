@@ -1,9 +1,12 @@
+'use client'
+
 import { Box, Chip, Paper, Typography } from '@mui/material'
 import '../styles/job.scss'
 import type { CSSProperties } from 'react'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Navigate, useParams } from 'react-router-dom'
-import { pickLocale, pickLocaleList } from '@/cv-data'
+import { useParams, useRouter } from 'next/navigation'
+import { assetSrc, pickLocale, pickLocaleList } from '@/cv-data'
 import { Main2Toolbar } from '@/features/welcome/components'
 import { ProjectCard } from '@/features/project'
 import { useAppTheme } from '@/theme'
@@ -12,17 +15,18 @@ import { getJobById, getJobProjects } from '../lib/jobs'
 export function JobDetailContent() {
   const { t } = useTranslation()
   const { locale } = useAppTheme()
-  const { jobId } = useParams<{ jobId: string }>()
+  const router = useRouter()
+  const params = useParams<{ jobId: string }>()
+  const jobId = typeof params.jobId === 'string' ? params.jobId : undefined
+  const job = jobId ? getJobById(jobId) : undefined
 
-  if (!jobId) {
-    return <Navigate to="/" replace />
-  }
+  useEffect(() => {
+    if (!jobId || !job) {
+      router.replace('/')
+    }
+  }, [job, jobId, router])
 
-  const job = getJobById(jobId)
-
-  if (!job) {
-    return <Navigate to="/" replace />
-  }
+  if (!jobId || !job) return null
 
   const relatedProjects = getJobProjects(job)
   const highlights = pickLocaleList(job.highlights, locale)
@@ -43,7 +47,7 @@ export function JobDetailContent() {
           <Box className="job-detail__logo-wrap">
             <img
               className="job-detail__logo"
-              src={job.logo.src}
+              src={assetSrc(job.logo.src)}
               alt={pickLocale(job.logo.alt, locale)}
             />
           </Box>

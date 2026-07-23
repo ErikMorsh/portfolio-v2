@@ -1,7 +1,8 @@
 import { Box, Paper, Typography } from '@mui/material'
 import '../styles/skill.scss'
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Navigate, useParams } from 'react-router-dom'
+import { useParams, useRouter } from 'next/navigation'
 import { pickLocale, pickLocaleList } from '@/cv-data'
 import { Main2Toolbar } from '@/features/welcome/components'
 import { useAppTheme } from '@/theme'
@@ -11,16 +12,17 @@ import { SkillIcons } from './SkillIcons'
 export function SkillDetailContent() {
   const { t } = useTranslation()
   const { locale } = useAppTheme()
-  const { skillId } = useParams<{ skillId: string }>()
+  const router = useRouter()
+  const params = useParams<{ skillId?: string }>()
+  const skillId = typeof params.skillId === 'string' ? params.skillId : undefined
+  const skill = skillId ? getSkillById(skillId) : undefined
 
-  if (!skillId) {
-    return <Navigate to="/" replace />
-  }
+  useEffect(() => {
+    if (!skillId || !skill) router.replace('/')
+  }, [skill, skillId, router])
 
-  const skill = getSkillById(skillId)
-
-  if (!skill) {
-    return <Navigate to="/" replace />
+  if (!skillId || !skill) {
+    return null
   }
 
   const skillTitle = pickLocale(skill.title, locale)

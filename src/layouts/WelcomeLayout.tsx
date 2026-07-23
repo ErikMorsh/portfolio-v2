@@ -1,3 +1,5 @@
+'use client'
+
 import { AboutSection } from '@/features/about'
 import { ContactSection } from '@/features/contact'
 import { ExperienceSection } from '@/features/experience'

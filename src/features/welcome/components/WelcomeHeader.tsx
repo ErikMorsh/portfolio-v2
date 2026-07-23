@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from '@mui/material'
-import { about, personal, pickLocale } from '@/cv-data'
+import { about, assetSrc, personal, pickLocale } from '@/cv-data'
 import { useAppTheme } from '@/theme'
 
 export function WelcomeHeader() {
@@ -10,7 +10,7 @@ export function WelcomeHeader() {
       <Box className="welcome__avatar-wrap">
         <img
           className="welcome__avatar"
-          src={personal.profilePhoto.src}
+          src={assetSrc(personal.profilePhoto.src)}
           alt={pickLocale(personal.profilePhoto.alt, locale)}
         />
       </Box>

@@ -1,3 +1,5 @@
+'use client'
+
 import {
   createContext,
   useCallback,
@@ -27,6 +29,7 @@ type ThemeModeContextValue = {
 const ThemeModeContext = createContext<ThemeModeContextValue | null>(null)
 
 const getInitialMode = (): PaletteMode => {
+  if (typeof window === 'undefined') return 'dark'
   const stored = localStorage.getItem(THEME_STORAGE_KEY)
   if (stored === 'light' || stored === 'dark') return stored
   return window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -36,15 +39,22 @@ const getInitialMode = (): PaletteMode => {
 
 export function AppThemeProvider({ children }: { children: ReactNode }) {
   const { i18n } = useTranslation()
-  const [mode, setMode] = useState<PaletteMode>(getInitialMode)
+  const [mode, setMode] = useState<PaletteMode>('dark')
+  const [ready, setReady] = useState(false)
   const locale = (i18n.language === 'en' ? 'en' : 'fa') as Locale
+
+  useEffect(() => {
+    setMode(getInitialMode())
+    setReady(true)
+  }, [])
 
   const theme = useMemo(() => createAppTheme(mode, locale), [mode, locale])
 
   useEffect(() => {
+    if (!ready) return
     document.documentElement.dataset.theme = mode
     document.documentElement.style.colorScheme = mode
-  }, [mode])
+  }, [mode, ready])
 
   const toggleMode = useCallback(() => {
     setMode((current) => {

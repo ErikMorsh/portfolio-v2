@@ -1,8 +1,8 @@
 import { Box, Chip, Paper, Typography } from '@mui/material'
 import type { CSSProperties } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
-import { pickLocale } from '@/cv-data'
+import { useParams, useRouter } from 'next/navigation'
+import { assetSrc, pickLocale } from '@/cv-data'
 import { getJobForProject } from '@/features/job'
 import { useAppTheme } from '@/theme'
 import { projectPaths, type Project } from '../lib/projects'
@@ -23,8 +23,9 @@ export function ProjectCard({
   style,
 }: ProjectCardProps) {
   const { t } = useTranslation()
-  const navigate = useNavigate()
-  const { projectId } = useParams<{ projectId: string }>()
+  const router = useRouter()
+  const params = useParams<{ projectId?: string }>()
+  const projectId = typeof params.projectId === 'string' ? params.projectId : undefined
   const { locale } = useAppTheme()
   const isSelected = projectId === project.id
   const isDetailMode = Boolean(projectId)
@@ -34,7 +35,7 @@ export function ProjectCard({
 
   const openDetail = () => {
     if (!targetJobId) return
-    navigate(projectPaths.detail(targetJobId, project.id))
+    router.push(projectPaths.detail(targetJobId, project.id))
   }
 
   return (
@@ -71,7 +72,7 @@ export function ProjectCard({
               <Box className="project-card__job-logo-wrap">
                 <img
                   className="project-card__job-logo"
-                  src={parentJob.logo.src}
+                  src={assetSrc(parentJob.logo.src)}
                   alt={pickLocale(parentJob.logo.alt, locale)}
                 />
               </Box>

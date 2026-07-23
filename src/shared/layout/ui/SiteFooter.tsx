@@ -1,6 +1,8 @@
+'use client'
+
 import { Box, Typography } from '@mui/material'
 import { personal, pickLocale } from '@/cv-data'
-import { heroCopy } from '@/features/hero'
+import { heroCopy } from '@/features/hero/data/hero'
 import { useAppTheme } from '@/theme'
 
 const COPYRIGHT_YEAR = 2026

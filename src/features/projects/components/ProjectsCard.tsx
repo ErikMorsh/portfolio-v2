@@ -1,7 +1,7 @@
 import GitHubIcon from '@mui/icons-material/GitHub'
 import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded'
 import { Box, IconButton, Typography } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import Link from 'next/link'
 import { pickLocale } from '@/cv-data'
 import { getJobForProject } from '@/features/job'
 import { getProjectById, projectPaths } from '@/features/project'
@@ -76,8 +76,8 @@ export function ProjectsCard({ item }: ProjectsCardProps) {
           {detailHref ? (
             <IconButton
               className="projects-card__action"
-              component={RouterLink}
-              to={detailHref}
+              component={Link}
+              href={detailHref}
               size="small"
               aria-label={`${pickLocale(projectsCopy.viewDetails, locale)}: ${title}`}
             >

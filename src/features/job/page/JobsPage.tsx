@@ -1,7 +1,7 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Box, Link as MuiLink, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { Page } from '@/shared/layout'
 import { JobList } from '../components'
 import '../styles/job.scss'
@@ -14,7 +14,7 @@ export function JobsPage() {
       <MuiLink
         className="job-page__back"
         component={Link}
-        to="/"
+        href="/"
         underline="hover"
         variant="body2"
       >

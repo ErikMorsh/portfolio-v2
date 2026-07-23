@@ -1,6 +1,6 @@
 import { Paper, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams, useRouter } from 'next/navigation'
 import { pickLocale } from '@/cv-data'
 import { useAppTheme } from '@/theme'
 import { skillPaths, type Skill } from '../lib/skills'
@@ -12,14 +12,15 @@ type SkillCardProps = {
 
 export function SkillCard({ skill }: SkillCardProps) {
   const { t } = useTranslation()
-  const navigate = useNavigate()
-  const { skillId } = useParams<{ skillId: string }>()
+  const router = useRouter()
+  const params = useParams<{ skillId?: string }>()
+  const skillId = typeof params.skillId === 'string' ? params.skillId : undefined
   const { locale } = useAppTheme()
   const isSelected = skillId === skill.id
   const title = pickLocale(skill.title, locale)
 
   const openDetail = () => {
-    navigate(skillPaths.detail(skill.id))
+    router.push(skillPaths.detail(skill.id))
   }
 
   return (

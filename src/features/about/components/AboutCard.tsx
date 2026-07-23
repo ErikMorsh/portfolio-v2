@@ -1,6 +1,6 @@
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import { Box, Typography } from '@mui/material'
-import { personal, pickLocale } from '@/cv-data'
+import { assetSrc, personal, pickLocale } from '@/cv-data'
 import { useAppTheme } from '@/theme'
 import { aboutCopy } from '../data/about'
 
@@ -12,7 +12,7 @@ export function AboutCard() {
       <Box className="about-card__portrait">
         <img
           className="about-card__image"
-          src={personal.profilePhoto.src}
+          src={assetSrc(personal.profilePhoto.src)}
           alt={pickLocale(personal.profilePhoto.alt, locale)}
         />
       </Box>

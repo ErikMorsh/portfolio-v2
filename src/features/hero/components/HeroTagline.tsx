@@ -1,3 +1,5 @@
+'use client'
+
 import { Typography } from '@mui/material'
 import { useEffect, useMemo, useState } from 'react'
 import { TypeAnimation } from 'react-type-animation'
