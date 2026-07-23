@@ -3,7 +3,8 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   sassOptions: {
-    includePaths: [path.join(__dirname, 'src')],
+    // process.cwd() is reliable in Docker/Liara; __dirname can break with ESM next.config.ts
+    includePaths: [path.join(process.cwd(), 'src')],
     silenceDeprecations: ['legacy-js-api'],
   },
   images: {
