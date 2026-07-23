@@ -1,0 +1,102 @@
+@use 'tokens' as *;
+
+.experience {
+  --experience-accent: #{$experience-accent};
+  --experience-ink: #{$experience-ink};
+  --experience-muted: #{$experience-muted};
+  --experience-surface: #{$experience-surface};
+  --experience-card: #{$experience-card};
+  --experience-rail: #{$experience-rail};
+
+  position: relative;
+  isolation: isolate;
+  scroll-margin-top: 1.5rem;
+  color: var(--experience-ink);
+  background: var(--experience-surface);
+
+  &__shell {
+    width: min(#{$experience-max}, calc(100% - 2.5rem));
+    margin-inline: auto;
+    padding-block: clamp(4rem, 10vh, 6.5rem);
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-bottom: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  &__eyebrow {
+    margin: 0;
+    color: var(--experience-accent);
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    font-family: 'Syne', 'Vazirmatn', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 3rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.03em;
+    color: var(--experience-ink);
+  }
+
+  &__subtitle {
+    margin: 0;
+    max-width: 48ch;
+    color: var(--experience-muted);
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  &__timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.85rem;
+      bottom: 0.85rem;
+      inset-inline-start: 0.45rem;
+      width: 1px;
+      background: var(--experience-rail);
+    }
+  }
+
+  @media (max-width: 900px) {
+    &__shell {
+      width: min(#{$experience-max}, calc(100% - 1.5rem));
+    }
+
+    &__header {
+      align-items: center;
+      text-align: center;
+    }
+  }
+}
+
+[dir='rtl'] .experience {
+  &__header {
+    align-items: flex-start;
+    text-align: start;
+  }
+
+  @media (max-width: 900px) {
+    &__header {
+      align-items: center;
+      text-align: center;
+    }
+  }
+}

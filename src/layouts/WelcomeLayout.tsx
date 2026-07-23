@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { AboutSection } from '@/features/about'
+import { ExperienceSection } from '@/features/experience'
 import { HeroSection } from '@/features/hero'
 import { ProjectsSection } from '@/features/projects'
 import { SkillsSection } from '@/features/skills'
@@ -41,7 +42,7 @@ export function WelcomeLayout() {
       <AboutSection />
       <SkillsSection />
       <ProjectsSection />
-      <SectionPlaceholder id="experience" title="Experience" />
+      <ExperienceSection />
       <SectionPlaceholder id="contact" title="Contact" />
     </Page>
   )
