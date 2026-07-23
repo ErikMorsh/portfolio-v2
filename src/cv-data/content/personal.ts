@@ -21,4 +21,8 @@ export const personal: PersonalInfo = {
     href: 'https://www.linkedin.com/in/ErfanMorshedzadeh',
     username: 'ErfanMorshedzadeh',
   },
+  resume: {
+    href: '/resume.pdf',
+    fileName: 'Erfan-Morshedzadeh-Resume.pdf',
+  },
 }

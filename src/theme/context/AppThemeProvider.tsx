@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -39,6 +40,11 @@ export function AppThemeProvider({ children }: { children: ReactNode }) {
   const locale = (i18n.language === 'en' ? 'en' : 'fa') as Locale
 
   const theme = useMemo(() => createAppTheme(mode, locale), [mode, locale])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = mode
+    document.documentElement.style.colorScheme = mode
+  }, [mode])
 
   const toggleMode = useCallback(() => {
     setMode((current) => {

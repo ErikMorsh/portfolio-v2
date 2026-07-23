@@ -11,9 +11,15 @@
     gap: 0.9rem;
     min-width: 0;
     padding: 1rem 1.05rem;
-    border: 1px solid rgba(226, 220, 255, 0.1);
+    border: 1px solid var(--app-border);
     border-radius: 1rem;
     background: var(--contact-card);
+    box-shadow: var(--app-shadow);
+
+    .contact-info__social-btn {
+      align-self: center;
+      flex-shrink: 0;
+    }
   }
 
   &__icon {
@@ -24,7 +30,7 @@
     height: 2.4rem;
     flex-shrink: 0;
     border-radius: 0.75rem;
-    background: rgba(167, 139, 250, 0.12);
+    background: var(--app-accent-soft);
     color: var(--contact-accent);
     font-size: 1.15rem;
   }
@@ -39,7 +45,7 @@
 
   &__label {
     margin: 0;
-    color: rgba(226, 220, 255, 0.5);
+    color: var(--app-faint);
     font-size: 0.7rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.08em;
@@ -66,38 +72,22 @@
 
   &__hint {
     margin: 0;
-    color: rgba(226, 220, 255, 0.55);
+    color: var(--app-faint);
     font-size: 0.8rem !important;
     line-height: 1.4 !important;
   }
 
-  &__schedule {
-    flex-shrink: 0;
-    align-self: center;
-    min-height: 2rem !important;
-    padding-inline: 0.85rem !important;
-    border-radius: 0.65rem !important;
-    background: var(--contact-accent) !important;
-    color: #0b0a14 !important;
-    font-weight: 700 !important;
-    text-transform: none !important;
-    box-shadow: none !important;
-
-    &:hover {
-      background: #b79cff !important;
-    }
-  }
-
   &__services {
     padding: 1.1rem 1.05rem;
-    border: 1px solid rgba(226, 220, 255, 0.1);
+    border: 1px solid var(--app-border);
     border-radius: 1rem;
     background: var(--contact-card);
+    box-shadow: var(--app-shadow);
   }
 
   &__services-title {
     margin: 0 0 0.85rem;
-    color: rgba(226, 220, 255, 0.5);
+    color: var(--app-faint);
     font-size: 0.7rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.08em;
@@ -117,34 +107,120 @@
     display: flex;
     align-items: center;
     gap: 0.55rem;
-    color: rgba(226, 220, 255, 0.84);
+    color: var(--app-muted);
     font-size: 0.9rem;
     line-height: 1.35;
   }
 
   &__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+    border: 1.5px solid var(--app-accent-border);
+    border-radius: 0.3rem;
+    background: var(--app-accent-soft);
     color: var(--contact-accent);
-    font-size: 1rem !important;
+    font-size: 0.85rem !important;
+    line-height: 0;
+
+    .MuiSvgIcon-root {
+      font-size: inherit;
+    }
   }
 
   &__social {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.55rem;
     padding-top: 0.25rem;
   }
 
   &__social-btn {
-    width: 2.45rem;
-    height: 2.45rem;
-    border: 1px solid rgba(226, 220, 255, 0.12);
-    background: rgba(255, 255, 255, 0.03);
-    color: rgba(226, 220, 255, 0.78) !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.45rem !important;
+    height: 2.45rem !important;
+    padding: 0 0.65rem !important;
+    border: 1px solid var(--app-border-strong) !important;
+    border-radius: 0.65rem !important;
+    background: var(--app-input-bg) !important;
+    color: var(--app-muted) !important;
     font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    text-transform: none !important;
+    box-shadow: none !important;
+    overflow: hidden;
+    transition:
+      border-color 0.28s $contact-ease,
+      background-color 0.28s $contact-ease,
+      color 0.28s $contact-ease,
+      padding 0.35s $contact-ease;
 
-    &:hover {
-      border-color: rgba(167, 139, 250, 0.4);
-      background: rgba(167, 139, 250, 0.12);
+    &:hover,
+    &:focus-visible {
+      border-color: var(--app-accent-border) !important;
+      background: var(--app-accent-soft) !important;
       color: var(--contact-accent) !important;
+    }
+  }
+
+  &__social-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    line-height: 0;
+  }
+
+  &__social-label {
+    display: inline-block;
+    max-width: 0;
+    margin-inline-start: 0;
+    overflow: hidden;
+    opacity: 0;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    letter-spacing: 0.01em;
+    direction: ltr;
+    transition:
+      max-width 0.35s $contact-ease,
+      margin-inline-start 0.35s $contact-ease,
+      opacity 0.25s $contact-ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &__social-btn:hover,
+    &__social-btn:focus-visible {
+      padding-inline-end: 0.85rem !important;
+
+      .contact-info__social-label {
+        max-width: 14rem;
+        margin-inline-start: 0.5rem;
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (max-width: 900px), (hover: none), (pointer: coarse) {
+    &__social-label {
+      max-width: 14rem;
+      margin-inline-start: 0.5rem;
+      opacity: 1;
+    }
+
+    &__social-btn {
+      padding-inline-end: 0.85rem !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__social-btn,
+    &__social-label {
+      transition: none;
     }
   }
 }

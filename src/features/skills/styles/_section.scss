@@ -9,9 +9,9 @@
 
   position: relative;
   isolation: isolate;
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 5.5rem;
   color: var(--skills-ink);
-  background: var(--skills-surface);
+  background: transparent;
 
   &__shell {
     width: min(#{$skills-max}, calc(100% - 2.5rem));

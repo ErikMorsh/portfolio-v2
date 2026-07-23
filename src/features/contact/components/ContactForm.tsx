@@ -43,7 +43,7 @@ export function ContactForm() {
     const body = [
       fullName ? `Name: ${fullName}` : null,
       form.email ? `Email: ${form.email}` : null,
-      form.phone ? `Phone: +98 ${form.phone}` : null,
+      form.phone ? `Phone: ${form.phone}` : null,
       '',
       form.message,
     ]
@@ -70,6 +70,7 @@ export function ContactForm() {
             className="contact-form__input"
             name="firstName"
             autoComplete="given-name"
+            placeholder={pickLocale(contactCopy.form.firstNamePlaceholder, locale)}
             value={form.firstName}
             onChange={update('firstName')}
           />
@@ -82,6 +83,7 @@ export function ContactForm() {
             className="contact-form__input"
             name="lastName"
             autoComplete="family-name"
+            placeholder={pickLocale(contactCopy.form.lastNamePlaceholder, locale)}
             value={form.lastName}
             onChange={update('lastName')}
           />
@@ -108,20 +110,15 @@ export function ContactForm() {
         <span className="contact-form__label">
           {pickLocale(contactCopy.form.phone, locale)}
         </span>
-        <Box className="contact-form__phone">
-          <span className="contact-form__country">
-            {pickLocale(contactCopy.form.countryCode, locale)}
-          </span>
-          <input
-            className="contact-form__input"
-            type="tel"
-            name="phone"
-            autoComplete="tel-national"
-            placeholder={pickLocale(contactCopy.form.phonePlaceholder, locale)}
-            value={form.phone}
-            onChange={update('phone')}
-          />
-        </Box>
+        <input
+          className="contact-form__input"
+          type="tel"
+          name="phone"
+          autoComplete="tel"
+          placeholder={pickLocale(contactCopy.form.phonePlaceholder, locale)}
+          value={form.phone}
+          onChange={update('phone')}
+        />
       </label>
 
       <label className="contact-form__field">
@@ -145,7 +142,7 @@ export function ContactForm() {
           className="contact-form__textarea"
           name="message"
           required
-          rows={6}
+          rows={5}
           placeholder={pickLocale(contactCopy.form.messagePlaceholder, locale)}
           value={form.message}
           onChange={update('message')}

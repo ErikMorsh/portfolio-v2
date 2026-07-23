@@ -8,7 +8,7 @@
   width: 100%;
   margin: $space-2 0 0;
   padding: $space-4 0 0;
-  border-top: 1px solid rgba(167, 139, 250, 0.16);
+  border-top: 1px solid var(--app-accent-soft);
   list-style: none;
 
   &__item {

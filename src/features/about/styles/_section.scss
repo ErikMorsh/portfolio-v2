@@ -12,9 +12,9 @@
 
   position: relative;
   isolation: isolate;
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 5.5rem;
   color: var(--about-ink);
-  background: var(--about-surface);
+  background: transparent;
   overflow: visible;
 
   &__shell {

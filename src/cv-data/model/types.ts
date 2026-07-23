@@ -19,6 +19,11 @@ export interface PersonalInfo {
     href: string
     username: string
   }
+  /** Replace `public/resume.pdf` with your real CV file. */
+  resume: {
+    href: string
+    fileName: string
+  }
 }
 
 export interface AboutInfo {

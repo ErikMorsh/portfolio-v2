@@ -15,8 +15,8 @@
     gap: 0.55rem;
     padding: 0.45rem 0.9rem;
     border-radius: 999px;
-    border: 1px solid rgba(167, 139, 250, 0.35);
-    background: rgba(167, 139, 250, 0.08);
+    border: 1px solid var(--app-accent-border);
+    background: var(--app-accent-soft);
     color: var(--hero-muted);
     font-size: 0.82rem;
     animation: hero-availability-border 3.2s $hero-ease infinite;
@@ -105,9 +105,9 @@
   }
 
   &__cta-secondary {
-    border: 1px solid rgba(226, 220, 255, 0.28) !important;
+    border: 1px solid var(--app-border-strong) !important;
     color: var(--hero-ink) !important;
-    background: rgba(255, 255, 255, 0.03) !important;
+    background: var(--app-input-bg) !important;
 
     &:hover {
       border-color: var(--hero-accent-border) !important;
@@ -156,7 +156,7 @@
   }
 
   40% {
-    border-color: rgba(167, 139, 250, 0.58);
+    border-color: var(--app-accent-border);
   }
 }
 

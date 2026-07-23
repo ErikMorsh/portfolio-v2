@@ -57,10 +57,10 @@
 
   &__skill {
     padding: 0.45rem 0.9rem;
-    border: 1px solid rgba(226, 220, 255, 0.12);
+    border: 1px solid var(--app-border-strong);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.04);
-    color: rgba(226, 220, 255, 0.82);
+    background: var(--app-input-bg);
+    color: var(--app-muted);
     font-size: 0.82rem;
     line-height: 1.2;
   }

@@ -15,6 +15,8 @@ html {
 body {
   margin: 0;
   min-width: 320px;
+  background-color: var(--app-bg, #0b0a14);
+  color: var(--app-ink, #f4f1ff);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

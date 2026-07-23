@@ -1,9 +1,9 @@
-$hero-accent: #a78bfa;
-$hero-accent-soft: rgba(167, 139, 250, 0.18);
-$hero-accent-border: rgba(167, 139, 250, 0.45);
-$hero-ink: #f4f1ff;
-$hero-muted: rgba(226, 220, 255, 0.72);
-$hero-surface: #0b0a14;
-$hero-surface-elevated: rgba(22, 18, 40, 0.72);
+$hero-accent: var(--app-accent);
+$hero-accent-soft: var(--app-accent-soft);
+$hero-accent-border: var(--app-accent-border);
+$hero-ink: var(--app-ink);
+$hero-muted: var(--app-muted);
+$hero-surface: var(--app-bg);
+$hero-surface-elevated: var(--app-surface-elevated);
 $hero-ease: cubic-bezier(0.22, 1, 0.36, 1);
 $hero-max: 1180px;

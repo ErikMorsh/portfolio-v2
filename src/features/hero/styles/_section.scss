@@ -16,8 +16,9 @@
   display: flex;
   flex-direction: column;
   color: var(--hero-ink);
-  background: #0b0a14;
+  background: transparent;
   overflow: visible;
+  scroll-margin-top: 5.5rem;
 
   &__shell {
     position: relative;
@@ -27,8 +28,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding-block: 1.25rem 2.5rem;
-    gap: clamp(2rem, 5vh, 3.5rem);
+    padding-block: 0.5rem 2.5rem;
   }
 
   &__stage {
@@ -39,29 +39,6 @@
     align-items: center;
     gap: clamp(2rem, 5vw, 4rem);
     overflow: visible;
-
-    > :not(.hero__stage-glow) {
-      position: relative;
-      z-index: 1;
-    }
-  }
-
-  &__stage-glow {
-    position: absolute;
-    top: -18%;
-    left: -12%;
-    width: min(62%, 520px);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(167, 139, 250, 0.42) 0%,
-      rgba(167, 139, 250, 0.18) 38%,
-      transparent 72%
-    );
-    filter: blur(48px);
-    z-index: 0;
-    pointer-events: none;
   }
 
   @media (max-width: 900px) {

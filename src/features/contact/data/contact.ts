@@ -68,12 +68,13 @@ export const contactCopy = {
   },
   form: {
     firstName: { fa: 'نام', en: 'First name' },
+    firstNamePlaceholder: { fa: 'مثلاً عرفان', en: 'e.g. Alex' },
     lastName: { fa: 'نام خانوادگی', en: 'Last name' },
+    lastNamePlaceholder: { fa: 'مثلاً مرادی', en: 'e.g. Morgan' },
     email: { fa: 'ایمیل *', en: 'Email address *' },
     emailPlaceholder: { fa: 'you@example.com', en: 'you@example.com' },
     phone: { fa: 'شماره تماس', en: 'Phone number' },
-    phonePlaceholder: { fa: '۹۱۲ ۱۲۳ ۴۵۶۷', en: '912 123 4567' },
-    countryCode: { fa: 'IR +۹۸', en: 'IR +98' },
+    phonePlaceholder: { fa: '+۹۸ ۹۱۲ ۱۲۳ ۴۵۶۷', en: '+98 912 123 4567' },
     subject: { fa: 'موضوع', en: 'Subject' },
     subjectPlaceholder: { fa: 'درخواست پروژه', en: 'Project Inquiry' },
     message: { fa: 'پیام *', en: 'Message *' },
@@ -87,5 +88,6 @@ export const contactCopy = {
 
 export const contactLinks = {
   github: 'https://github.com/ErikMorsh',
+  githubUsername: 'ErikMorsh',
   phoneHref: 'tel:+989037579839',
 } as const

@@ -5,11 +5,37 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import PhoneInTalkRoundedIcon from '@mui/icons-material/PhoneInTalkRounded'
-import { Box, Button, IconButton, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import type { ReactNode } from 'react'
 import { personal, pickLocale } from '@/cv-data'
 import { useAppTheme } from '@/theme'
 import { contactCopy, contactLinks } from '../data/contact'
+
+type SocialLinkProps = {
+  href: string
+  name: string
+  value: string
+  icon: ReactNode
+  external?: boolean
+}
+
+function SocialLink({ href, name, value, icon, external }: SocialLinkProps) {
+  return (
+    <Button
+      className="contact-info__social-btn"
+      component="a"
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+      aria-label={`${name}: ${value}`}
+    >
+      <span className="contact-info__social-icon" aria-hidden>
+        {icon}
+      </span>
+      <span className="contact-info__social-label">{value}</span>
+    </Button>
+  )
+}
 
 type InfoCardProps = {
   icon: ReactNode
@@ -82,15 +108,12 @@ export function ContactInfo() {
         label={pickLocale(contactCopy.info.schedule.label, locale)}
         value={pickLocale(contactCopy.info.schedule.value, locale)}
         action={
-          <Button
-            className="contact-info__schedule"
-            component="a"
+          <SocialLink
             href={contactLinks.phoneHref}
-            variant="contained"
-            size="small"
-          >
-            {pickLocale(contactCopy.info.schedule.action, locale)}
-          </Button>
+            name={pickLocale(contactCopy.info.schedule.action, locale)}
+            value={personal.phone}
+            icon={<PhoneInTalkRoundedIcon fontSize="inherit" />}
+          />
         }
       />
 
@@ -105,10 +128,9 @@ export function ContactInfo() {
               className="contact-info__service"
               component="li"
             >
-              <CheckRoundedIcon
-                className="contact-info__check"
-                fontSize="inherit"
-              />
+              <span className="contact-info__check" aria-hidden>
+                <CheckRoundedIcon fontSize="inherit" />
+              </span>
               <span>{pickLocale(item, locale)}</span>
             </Box>
           ))}
@@ -116,34 +138,26 @@ export function ContactInfo() {
       </Box>
 
       <Box className="contact-info__social">
-        <IconButton
-          className="contact-info__social-btn"
-          component="a"
+        <SocialLink
           href={contactLinks.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={pickLocale(contactCopy.social.github, locale)}
-        >
-          <GitHubIcon fontSize="inherit" />
-        </IconButton>
-        <IconButton
-          className="contact-info__social-btn"
-          component="a"
+          name={pickLocale(contactCopy.social.github, locale)}
+          value={contactLinks.githubUsername}
+          icon={<GitHubIcon fontSize="inherit" />}
+          external
+        />
+        <SocialLink
           href={personal.linkedin.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={pickLocale(contactCopy.social.linkedin, locale)}
-        >
-          <LinkedInIcon fontSize="inherit" />
-        </IconButton>
-        <IconButton
-          className="contact-info__social-btn"
-          component="a"
+          name={pickLocale(contactCopy.social.linkedin, locale)}
+          value={personal.linkedin.username}
+          icon={<LinkedInIcon fontSize="inherit" />}
+          external
+        />
+        <SocialLink
           href={personal.email.href}
-          aria-label={pickLocale(contactCopy.social.email, locale)}
-        >
-          <EmailRoundedIcon fontSize="inherit" />
-        </IconButton>
+          name={pickLocale(contactCopy.social.email, locale)}
+          value={personal.email.label}
+          icon={<EmailRoundedIcon fontSize="inherit" />}
+        />
       </Box>
     </Box>
   )

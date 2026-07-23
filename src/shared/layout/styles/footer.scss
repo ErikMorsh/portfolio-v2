@@ -1,7 +1,5 @@
 .site-footer {
-  border-top: 1px solid rgba(226, 220, 255, 0.1);
-  background: #0b0a14;
-  color: rgba(226, 220, 255, 0.72);
+  color: var(--app-muted);
 
   &__shell {
     width: min(1180px, calc(100% - 2.5rem));
@@ -18,10 +16,10 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.35rem 0.8rem;
-    border: 1px solid rgba(167, 139, 250, 0.28);
+    border: 1px solid var(--app-accent-border);
     border-radius: 999px;
-    background: rgba(167, 139, 250, 0.08);
-    color: rgba(226, 220, 255, 0.82);
+    background: var(--app-accent-soft);
+    color: var(--app-ink);
     font-size: 0.78rem;
     line-height: 1.35;
     white-space: nowrap;
@@ -32,13 +30,13 @@
     height: 0.45rem;
     flex-shrink: 0;
     border-radius: 50%;
-    background: #a78bfa;
-    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.18);
+    background: var(--app-accent);
+    box-shadow: 0 0 0 3px var(--app-accent-soft);
   }
 
   &__copy {
     margin: 0;
-    color: rgba(226, 220, 255, 0.48);
+    color: var(--app-faint);
     font-size: 0.8rem !important;
     line-height: 1.4 !important;
   }

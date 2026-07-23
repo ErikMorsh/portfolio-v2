@@ -8,10 +8,9 @@
   --contact-card: #{$contact-card};
 
   position: relative;
-  isolation: isolate;
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 5.5rem;
   color: var(--contact-ink);
-  background: var(--contact-surface);
+  background: transparent;
 
   &__shell {
     width: min(#{$contact-max}, calc(100% - 2.5rem));

@@ -1,5 +1,5 @@
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded'
-import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded'
+import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded'
 import { Box, Button, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { personal, pickLocale } from '@/cv-data'
@@ -47,11 +47,10 @@ export function HeroContent() {
         <Button
           className="hero-content__cta-secondary"
           component="a"
-          href={personal.linkedin.href}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={personal.resume.href}
+          download={personal.resume.fileName}
           variant="outlined"
-          startIcon={<OpenInNewRoundedIcon />}
+          startIcon={<DownloadRoundedIcon />}
           aria-label={t('hero.resumeAria')}
         >
           {pickLocale(heroCopy.resume, locale)}

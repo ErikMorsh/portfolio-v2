@@ -9,9 +9,9 @@
 
   position: relative;
   isolation: isolate;
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 5.5rem;
   color: var(--projects-ink);
-  background: var(--projects-surface);
+  background: transparent;
 
   &__shell {
     width: min(#{$projects-max}, calc(100% - 2.5rem));
