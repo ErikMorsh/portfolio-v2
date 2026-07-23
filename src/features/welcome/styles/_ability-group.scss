@@ -1,0 +1,23 @@
+@use '@/shared/styles/variables' as *;
+
+.welcome {
+  &__ability-group {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+  }
+
+  &__ability-group-title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+
+  &__ability-group-items {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
+}

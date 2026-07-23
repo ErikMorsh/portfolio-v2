@@ -5,11 +5,9 @@
   min-height: 100vh;
 
   &__shell {
-    @include layout-container($layout-max-width);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-block: $layout-padding-block;
   }
 }
 

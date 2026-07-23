@@ -11,21 +11,3 @@ export const JobsPage = lazy(() =>
     default: module.JobsPage,
   })),
 )
-
-export const SkillDetailContent = lazy(() =>
-  import('@/features/skill/components/SkillDetailContent').then((module) => ({
-    default: module.SkillDetailContent,
-  })),
-)
-
-export const JobDetailContent = lazy(() =>
-  import('@/features/job/components/JobDetailContent').then((module) => ({
-    default: module.JobDetailContent,
-  })),
-)
-
-export const ProjectDetailContent = lazy(() =>
-  import('@/features/project/components/ProjectDetailContent').then((module) => ({
-    default: module.ProjectDetailContent,
-  })),
-)

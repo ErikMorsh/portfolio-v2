@@ -47,6 +47,20 @@
   "skill": {
     "viewDetails": "View details"
   },
+  "hero": {
+    "resumeAria": "Download resume",
+    "statsLabel": "Career highlights",
+    "nav": {
+      "label": "Primary",
+      "brand": "Erfan Morshedzadeh home",
+      "home": "Home",
+      "about": "About",
+      "skills": "Skills",
+      "projects": "Projects",
+      "experience": "Experience",
+      "contact": "Contact"
+    }
+  },
   "nav": {
     "home": "Home",
     "breadcrumb": "Breadcrumb"

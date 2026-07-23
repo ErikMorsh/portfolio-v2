@@ -1,0 +1,108 @@
+@use '@/shared/styles/variables' as *;
+@use 'tokens' as *;
+
+.hero-nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: $space-4;
+  padding-block: $space-2;
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    padding-inline: 0.65rem;
+    border-radius: 0.85rem;
+    font-family: 'Syne', 'Vazirmatn', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    color: var(--hero-ink);
+    text-decoration: none;
+    background: linear-gradient(145deg, rgba(167, 139, 250, 0.28), rgba(167, 139, 250, 0.06));
+    border: 1px solid var(--hero-accent-border);
+    box-shadow: 0 0 24px rgba(167, 139, 250, 0.2);
+    transition: transform 220ms $hero-ease, box-shadow 220ms $hero-ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 32px rgba(167, 139, 250, 0.32);
+    }
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.15rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__link {
+    position: relative;
+    color: var(--hero-muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding-block: 0.35rem;
+    transition: color 180ms $hero-ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-inline: 0.15rem;
+      bottom: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--hero-accent);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 200ms $hero-ease;
+    }
+
+    &:hover,
+    &--active {
+      color: var(--hero-ink);
+    }
+
+    &--active::after,
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__icon-btn {
+    min-width: 2.5rem !important;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem !important;
+    border: 1px solid var(--hero-accent-border) !important;
+    color: var(--hero-ink) !important;
+
+    &:hover {
+      background: var(--hero-accent-soft) !important;
+      border-color: var(--hero-accent) !important;
+    }
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+
+    &__links {
+      display: none;
+    }
+  }
+}

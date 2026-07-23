@@ -1,0 +1,26 @@
+@use '@/shared/styles/variables' as *;
+
+.welcome {
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: $space-2;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    padding-block: $space-2;
+    margin-block: calc(-1 * $space-2) 0;
+
+    .MuiButton-root {
+      display: inline-flex;
+      align-items: center;
+      gap: $space-2;
+    }
+
+    .MuiButton-startIcon {
+      margin: 0;
+    }
+  }
+}

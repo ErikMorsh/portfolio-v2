@@ -2,10 +2,15 @@ import { createTheme, type ThemeOptions } from '@mui/material/styles'
 import type { PaletteMode } from '@mui/material'
 import type { Locale } from '@/shared/types'
 
+const paletteTokens = {
+  light: { primary: '#2563d4' },
+  dark: { primary: '#74a0f5' },
+} as const
+
 const getPalette = (mode: PaletteMode): ThemeOptions['palette'] => ({
   mode,
   primary: {
-    main: mode === 'light' ? '#3949ab' : '#9fa8da',
+    main: paletteTokens[mode].primary,
   },
   secondary: {
     main: mode === 'light' ? '#5c6bc0' : '#7986cb',
@@ -16,15 +21,17 @@ const getPalette = (mode: PaletteMode): ThemeOptions['palette'] => ({
   },
 })
 
-export const createAppTheme = (mode: PaletteMode, locale: Locale) =>
-  createTheme({
+export const createAppTheme = (mode: PaletteMode, locale: Locale) => {
+  const primaryMain = paletteTokens[mode].primary
+
+  return createTheme({
     direction: locale === 'fa' ? 'rtl' : 'ltr',
     palette: getPalette(mode),
     typography: {
       fontFamily:
         locale === 'fa'
           ? '"Vazirmatn", "Segoe UI", Tahoma, sans-serif'
-          : '"Segoe UI", "Helvetica Neue", Arial, sans-serif',
+          : '"Syne", "Segoe UI", "Helvetica Neue", sans-serif',
     },
     shape: {
       borderRadius: 12,
@@ -34,8 +41,10 @@ export const createAppTheme = (mode: PaletteMode, locale: Locale) =>
         styleOverrides: {
           body: {
             minHeight: '100vh',
+            '--app-color-primary': primaryMain,
           },
         },
       },
     },
   })
+}

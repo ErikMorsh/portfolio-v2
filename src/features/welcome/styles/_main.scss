@@ -1,0 +1,22 @@
+@use '@/shared/styles/variables' as *;
+
+.welcome {
+  &__section {
+    min-height: 180px;
+    padding: $space-5;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-soft;
+    border: 1px dashed rgba(92, 107, 192, 0.25);
+  }
+
+  &__section-title {
+    margin: 0 0 $space-4;
+    font-weight: 700;
+  }
+
+  &__section-placeholder {
+    margin: 0;
+    font-style: italic;
+    opacity: 0.75;
+  }
+}

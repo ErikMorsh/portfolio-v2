@@ -1,0 +1,69 @@
+@use '@/shared/styles/variables' as *;
+
+.welcome {
+  &__header {
+    display: flex;
+    gap: $space-5;
+    padding: $space-5;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-soft;
+    align-items: center;
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  &__avatar-wrap {
+    max-width: 168px;
+    max-height: 168px;
+
+    @media (max-width: $breakpoint-sm) {
+      align-self: center;
+      width: 128px;
+      height: 128px;
+      min-width: 0;
+      max-width: none;
+    }
+  }
+
+  &__avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(92, 107, 192, 0.35);
+  }
+
+  &__header-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    margin: 0 0 $space-2;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  &__title {
+    margin: 0 0 $space-4;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  &__bio {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    margin-top: $space-3;
+  }
+
+  &__bio-text {
+    margin: 0;
+    line-height: 1.75;
+  }
+}

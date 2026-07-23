@@ -47,6 +47,20 @@
   "skill": {
     "viewDetails": "مشاهده جزئیات"
   },
+  "hero": {
+    "resumeAria": "دانلود رزومه",
+    "statsLabel": "نکات برجسته شغلی",
+    "nav": {
+      "label": "منوی اصلی",
+      "brand": "خانه عرفان مرشدزاده",
+      "home": "خانه",
+      "about": "درباره",
+      "skills": "مهارت‌ها",
+      "projects": "پروژه‌ها",
+      "experience": "سوابق",
+      "contact": "تماس"
+    }
+  },
   "nav": {
     "home": "خانه",
     "breadcrumb": "مسیر صفحه"

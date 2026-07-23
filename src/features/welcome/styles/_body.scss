@@ -1,0 +1,202 @@
+@use '@/shared/styles/variables' as *;
+@use 'tokens' as *;
+
+.welcome {
+  &__body {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: $space-5;
+
+    &--detail {
+      position: relative;
+      gap: $space-4;
+      align-items: stretch;
+      overflow: visible;
+
+      .welcome__sidebar-column {
+        position: absolute;
+        inset-inline-start: 0;
+        top: 0;
+        z-index: 0;
+      }
+
+      .welcome__main {
+        gap: 0;
+      }
+    }
+
+    &--detail-job {
+      .welcome__section:not(.welcome__section--jobs) {
+        display: none;
+      }
+
+      .welcome__section--jobs {
+        min-height: 0;
+        padding: $space-4;
+
+        .welcome__section-header {
+          margin-bottom: $space-3;
+        }
+
+        .welcome__section-title {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &--detail-project {
+      .welcome__section:not(.welcome__section--projects) {
+        display: none;
+      }
+
+      .welcome__section--projects {
+        min-height: 0;
+        padding: $space-4;
+
+        .welcome__section-title {
+          margin-bottom: $space-3;
+        }
+      }
+    }
+
+    &--detail-skill {
+      .welcome__section:not(.welcome__section--skills) {
+        display: none;
+      }
+
+      .welcome__section--skills {
+        min-height: 0;
+        padding: $space-4;
+
+        .welcome__section-title {
+          margin-bottom: $space-3;
+        }
+      }
+    }
+
+    &:not(&--detail) {
+      overflow: hidden;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      flex-direction: column;
+    }
+  }
+
+  &__sidebar-column {
+    flex: 0 0 $welcome-sidebar-width;
+    max-width: 300px;
+    min-width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    overflow: hidden;
+    transition:
+      flex-basis 0ms linear $welcome-sidebar-duration,
+      max-width 0ms linear $welcome-sidebar-duration,
+      min-width 0ms linear $welcome-sidebar-duration,
+      margin 0ms linear $welcome-sidebar-duration;
+
+    .welcome__body--detail & {
+      flex: 0 0 0;
+      max-width: 0;
+      min-width: 0;
+      margin: 0;
+      pointer-events: none;
+    }
+
+    .welcome__body:not(.welcome__body--detail) & {
+      transition:
+        flex-basis 0ms linear 0ms,
+        max-width 0ms linear 0ms,
+        min-width 0ms linear 0ms,
+        margin 0ms linear 0ms;
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
+    flex: 1 1 0;
+    min-width: 0;
+    transition:
+      flex $welcome-main-duration $welcome-ease,
+      max-width $welcome-main-duration $welcome-ease,
+      min-width $welcome-main-duration $welcome-ease;
+
+    .welcome__body--detail & {
+      flex: 0 0 $welcome-sidebar-width;
+      max-width: 300px;
+      min-width: 240px;
+      transition-delay: $welcome-main-delay;
+    }
+
+    .welcome__body:not(.welcome__body--detail) & {
+      flex: 1 1 0;
+      max-width: none;
+      min-width: 0;
+      transition:
+        flex 0ms linear 0ms,
+        max-width 0ms linear 0ms,
+        min-width 0ms linear 0ms;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      .welcome__body--detail & {
+        flex: 1 1 auto;
+        max-width: none;
+        min-width: 0;
+      }
+    }
+  }
+
+  &__main2 {
+    flex: 0 0 0;
+    min-width: 0;
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $welcome-main2-duration $welcome-ease;
+
+    .welcome__body--detail & {
+      position: static;
+      visibility: visible;
+      height: auto;
+      flex: 1 1 0;
+      width: auto;
+      min-width: 0;
+      overflow: visible;
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity $welcome-main2-duration $welcome-ease $welcome-main2-delay;
+    }
+
+    .welcome__body:not(.welcome__body--detail) & {
+      position: absolute;
+      inset-inline-end: 0;
+      top: 0;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+      transition-delay: 0ms;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      .welcome__body--detail & {
+        flex: 1 1 auto;
+        width: 100%;
+      }
+    }
+  }
+
+  &__main2-content {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    min-width: 0;
+  }
+}

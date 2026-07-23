@@ -1,0 +1,137 @@
+@use '@/shared/styles/variables' as *;
+
+.welcome {
+  &__portfolio-source {
+    flex-shrink: 0;
+  }
+
+  &__portfolio-source-inner {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+  }
+
+  &__portfolio-source-subtitle {
+    margin: calc(-1 * #{$space-2}) 0 0;
+    line-height: 1.45;
+  }
+
+  &__portfolio-source-bar {
+    display: flex;
+    width: 100%;
+    height: 8px;
+    overflow: hidden;
+    border-radius: $radius-sm;
+    background: rgba(92, 107, 192, 0.12);
+  }
+
+  &__portfolio-source-bar-segment {
+    flex-shrink: 0;
+    min-width: 2px;
+    height: 100%;
+    transition: opacity $transition-base;
+
+    &:hover {
+      opacity: 0.82;
+    }
+
+    &:first-child {
+      border-start-start-radius: inherit;
+      border-end-start-radius: inherit;
+    }
+
+    &:last-child {
+      border-start-end-radius: inherit;
+      border-end-end-radius: inherit;
+    }
+  }
+
+  &__portfolio-source-legend {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__portfolio-source-legend-item {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    min-width: 0;
+  }
+
+  &__portfolio-source-legend-dot {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+
+  &__portfolio-source-legend-name {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+  }
+
+  &__portfolio-source-legend-share {
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__portfolio-source-repo {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    margin-top: $space-1;
+    padding: $space-2 $space-3;
+    border: 1px solid rgba(92, 107, 192, 0.22);
+    border-radius: $radius-md;
+    background: rgba(92, 107, 192, 0.05);
+    color: inherit;
+    transition:
+      border-color $transition-base,
+      background-color $transition-base,
+      box-shadow $transition-base;
+
+    &:hover {
+      border-color: rgba(92, 107, 192, 0.38);
+      background-color: rgba(92, 107, 192, 0.1);
+      box-shadow: 0 4px 12px rgba(15, 17, 23, 0.06);
+    }
+  }
+
+  &__portfolio-source-repo-icon {
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+
+  &__portfolio-source-repo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__portfolio-source-repo-label {
+    line-height: 1.2;
+    opacity: 0.75;
+  }
+
+  &__portfolio-source-repo-name {
+    direction: ltr;
+    unicode-bidi: plaintext;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  &__portfolio-source-repo-external {
+    flex-shrink: 0;
+    opacity: 0.55;
+    font-size: 0.95rem;
+  }
+}
