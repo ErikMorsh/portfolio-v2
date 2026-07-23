@@ -3,6 +3,7 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { createClient } from '@libsql/client'
 import { drizzle } from 'drizzle-orm/libsql'
+import { ensureMessagesSchema } from './ensure-schema'
 import * as schema from './schema'
 
 function resolveDbUrl() {
@@ -20,6 +21,7 @@ const url = resolveDbUrl()
 
 const globalForDb = globalThis as unknown as {
   sqliteClient?: ReturnType<typeof createClient>
+  schemaReady?: Promise<void>
 }
 
 const client =
@@ -31,6 +33,11 @@ const client =
 if (process.env.NODE_ENV !== 'production') {
   globalForDb.sqliteClient = client
 }
+
+globalForDb.schemaReady ??= ensureMessagesSchema((sql) => client.execute(sql)).then(
+  () => undefined,
+)
+await globalForDb.schemaReady
 
 export const db = drizzle(client, { schema })
 
