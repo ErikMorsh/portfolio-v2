@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, type HTMLMotionProps, type Variants } from 'motion/react'
+import { motion, type Variants } from 'motion/react'
 import type { ReactNode } from 'react'
 
 export const revealEase = [0.22, 1, 0.36, 1] as const
@@ -21,7 +21,8 @@ type RevealProps = {
   variants?: Variants
   delay?: number
   duration?: number
-} & Omit<HTMLMotionProps<'div'>, 'children' | 'variants' | 'initial' | 'whileInView'>
+  id?: string
+}
 
 /** Fades/slides up the first time it enters the viewport. */
 export function Reveal({
@@ -30,17 +31,17 @@ export function Reveal({
   variants = fadeUp,
   delay = 0,
   duration = 0.55,
-  ...rest
+  id,
 }: RevealProps) {
   return (
     <motion.div
+      id={id}
       className={className}
       variants={variants}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.2, margin: '0px 0px -8% 0px' }}
       transition={{ duration, delay, ease: revealEase }}
-      {...rest}
     >
       {children}
     </motion.div>
@@ -53,7 +54,8 @@ type RevealGroupProps = {
   stagger?: number
   delayChildren?: number
   as?: 'div' | 'ul'
-} & Omit<HTMLMotionProps<'div'>, 'children' | 'variants' | 'initial' | 'whileInView'>
+  id?: string
+}
 
 /** Parent that staggers children on first observe. Pair with `RevealItem`. */
 export function RevealGroup({
@@ -62,7 +64,7 @@ export function RevealGroup({
   stagger = 0.08,
   delayChildren = 0.04,
   as = 'div',
-  ...rest
+  id,
 }: RevealGroupProps) {
   const variants: Variants = {
     hidden: {},
@@ -75,12 +77,12 @@ export function RevealGroup({
   }
 
   const shared = {
+    id,
     className,
     variants,
     initial: 'hidden' as const,
     whileInView: 'show' as const,
     viewport: { once: true, amount: 0.15, margin: '0px 0px -6% 0px' },
-    ...rest,
   }
 
   if (as === 'ul') {
@@ -95,7 +97,8 @@ type RevealItemProps = {
   className?: string
   variants?: Variants
   as?: 'div' | 'li'
-} & Omit<HTMLMotionProps<'div'>, 'children' | 'variants'>
+  id?: string
+}
 
 /** Child item for use inside `RevealGroup`. */
 export function RevealItem({
@@ -103,13 +106,13 @@ export function RevealItem({
   className,
   variants = fadeUp,
   as = 'div',
-  ...rest
+  id,
 }: RevealItemProps) {
   const shared = {
+    id,
     className,
     variants,
     transition: { duration: 0.5, ease: revealEase },
-    ...rest,
   }
 
   if (as === 'li') {

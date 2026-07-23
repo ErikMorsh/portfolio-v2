@@ -2,7 +2,7 @@
 
 import { Box, Typography } from '@mui/material'
 import { personal, pickLocale } from '@/cv-data'
-import { heroCopy } from '@/features/hero/data/hero'
+import { heroCopy } from '@/features/portfolio/hero/data/hero'
 import { useAppTheme } from '@/theme'
 
 const COPYRIGHT_YEAR = 2026

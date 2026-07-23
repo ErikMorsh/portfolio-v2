@@ -1,11 +1,11 @@
 'use client'
 
-import { AboutSection } from '@/features/about'
-import { ContactSection } from '@/features/contact'
-import { ExperienceSection } from '@/features/experience'
-import { HeroNav, HeroSection, PageScrollIndicator } from '@/features/hero'
-import { ProjectsSection } from '@/features/projects'
-import { SkillsSection } from '@/features/skills'
+import { AboutSection } from '@/features/portfolio/about'
+import { ContactSection } from '@/features/portfolio/contact'
+import { ExperienceSection } from '@/features/portfolio/experience'
+import { HeroNav, HeroSection, PageScrollIndicator } from '@/features/portfolio/hero'
+import { ProjectsSection } from '@/features/portfolio/projects'
+import { SkillsSection } from '@/features/portfolio/skills'
 import { Page, SiteFooter } from '@/shared/layout'
 
 export function WelcomeLayout() {

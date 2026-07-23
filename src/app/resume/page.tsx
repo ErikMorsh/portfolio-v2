@@ -1,6 +1,6 @@
 'use client'
 
-import { ResumePage } from '@/features/resume/page/ResumePage'
+import { ResumePage } from '@/features/portfolio/resume/page/ResumePage'
 
 export default function ResumeRoutePage() {
   return <ResumePage />

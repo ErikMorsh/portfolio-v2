@@ -1,0 +1,70 @@
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: #0f1117;
+  color: #f3f4f8;
+}
+
+.login-page__card {
+  width: min(100%, 380px);
+  padding: 1.75rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #171a22;
+}
+
+.login-page__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+}
+
+.login-page__subtitle {
+  margin: 0 0 1.25rem;
+  color: rgba(243, 244, 248, 0.62);
+  font-size: 0.9rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.login-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+}
+
+.login-form__field input {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  background: #0f1117;
+  color: inherit;
+  padding: 0.65rem 0.75rem;
+}
+
+.login-form__error {
+  margin: 0;
+  color: #ff8f8f;
+  font-size: 0.85rem;
+}
+
+.login-form__submit {
+  margin-top: 0.25rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: #7c8cff;
+  color: #0f1117;
+  font-weight: 700;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+}
+
+.login-form__submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}

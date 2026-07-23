@@ -1,0 +1,107 @@
+.admin-shell {
+  --admin-bg: #0f1117;
+  --admin-surface: #171a22;
+  --admin-border: rgba(255, 255, 255, 0.08);
+  --admin-ink: #f3f4f8;
+  --admin-muted: rgba(243, 244, 248, 0.62);
+  --admin-accent: #7c8cff;
+
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 100vh;
+  background: var(--admin-bg);
+  color: var(--admin-ink);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+.admin-shell__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem;
+  border-right: 1px solid var(--admin-border);
+  background: var(--admin-surface);
+}
+
+.admin-shell__brand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.admin-shell__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.admin-shell__nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.5rem;
+  color: var(--admin-ink);
+  text-decoration: none;
+  background: rgba(124, 140, 255, 0.12);
+}
+
+.admin-shell__badge {
+  min-width: 1.4rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: var(--admin-accent);
+  color: #0f1117;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.admin-shell__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-shell__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-shell__email {
+  color: var(--admin-muted);
+  font-size: 0.9rem;
+}
+
+.admin-shell__logout {
+  border: 1px solid var(--admin-border);
+  border-radius: 0.45rem;
+  background: transparent;
+  color: var(--admin-ink);
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+}
+
+.admin-shell__logout:hover {
+  border-color: var(--admin-accent);
+}
+
+.admin-shell__content {
+  padding: 1.5rem;
+}
+
+@media (max-width: 800px) {
+  .admin-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-shell__sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--admin-border);
+  }
+}

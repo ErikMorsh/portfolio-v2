@@ -1,0 +1,124 @@
+@use 'tokens' as *;
+
+.contact-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.35rem 1.3rem 1.25rem;
+  border: 1px solid var(--app-border);
+  border-radius: 1.15rem;
+  background: var(--contact-card);
+  box-shadow: var(--app-shadow);
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+
+  &__label {
+    color: var(--app-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    border: 1px solid var(--app-border-strong);
+    border-radius: 0.75rem;
+    background: var(--app-input-bg);
+    color: var(--contact-ink);
+    font: inherit;
+    outline: none;
+    transition:
+      border-color 180ms $contact-ease,
+      background-color 180ms $contact-ease;
+
+    &::placeholder {
+      color: var(--app-faint);
+    }
+
+    &:focus {
+      border-color: var(--app-accent-border);
+      background: var(--app-accent-soft);
+    }
+  }
+
+  &__input {
+    min-height: 2.75rem;
+    padding: 0.7rem 0.9rem;
+  }
+
+  &__textarea {
+    height: 9.5rem;
+    min-height: 9.5rem;
+    max-height: 9.5rem;
+    padding: 0.85rem 0.9rem;
+    resize: none;
+  }
+
+  &__submit {
+    align-self: flex-start;
+    width: max-content;
+    min-width: 10rem;
+    min-height: 2.75rem !important;
+    margin-top: 0.25rem;
+    margin-left: auto;
+    padding-inline: 1.5rem !important;
+    gap: 0.65rem !important;
+    border-radius: 0.85rem !important;
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    text-transform: none !important;
+    box-shadow: 0 10px 24px rgba(124, 58, 237, 0.28) !important;
+
+    .MuiButton-endIcon {
+      margin: 0 !important;
+      transform: rotate(-45deg);
+    }
+
+    &:hover {
+      background: linear-gradient(135deg, #9b6cff, #8b5cf6) !important;
+    }
+  }
+
+  &__honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &__feedback {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    &--ok {
+      color: var(--app-accent, #6d28d9);
+    }
+
+    &--error {
+      color: #c62828;
+    }
+  }
+
+  @media (max-width: 640px) {
+    &__row {
+      grid-template-columns: 1fr;
+    }
+  }
+}
