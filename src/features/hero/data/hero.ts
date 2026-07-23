@@ -58,7 +58,6 @@ export const heroCopy = {
     fa: 'رزومه',
     en: 'Resume',
   },
-  brandInitials: 'EM',
 } as const
 
 export const heroStats: HeroStat[] = [

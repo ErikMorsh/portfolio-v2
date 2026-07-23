@@ -35,35 +35,35 @@
 
 .hero-nav {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: $space-4;
   width: min(#{$hero-max}, calc(100% - 2.5rem));
   margin-inline: auto;
   padding-block: $space-2;
 
-  &__brand {
-    display: inline-flex;
+  &--with-resume {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  &__resume {
+    display: inline-flex !important;
     align-items: center;
-    justify-content: center;
-    min-width: 2.75rem;
-    height: 2.75rem;
-    padding-inline: 0.65rem;
-    border-radius: 0.85rem;
-    font-family: 'Syne', 'Vazirmatn', sans-serif;
-    font-weight: 800;
-    font-size: 1.05rem;
-    letter-spacing: 0.04em;
-    color: var(--hero-ink);
-    text-decoration: none;
-    background: linear-gradient(145deg, var(--app-accent-soft), transparent);
-    border: 1px solid var(--hero-accent-border);
-    box-shadow: 0 0 24px var(--app-accent-soft);
-    transition: transform 220ms $hero-ease, box-shadow 220ms $hero-ease;
+    gap: 0.35rem;
+    min-height: 2.5rem;
+    padding-inline: 0.85rem !important;
+    border-radius: 0.75rem !important;
+    border: 1px solid var(--hero-accent-border) !important;
+    color: var(--hero-ink) !important;
+    background: var(--app-input-bg) !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    white-space: nowrap;
+    animation: hero-nav-resume-in 220ms $hero-ease both;
 
     &:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 32px var(--app-accent-border);
+      border-color: var(--hero-accent) !important;
+      background: var(--hero-accent-soft) !important;
     }
   }
 
@@ -132,12 +132,28 @@
   }
 
   @media (max-width: 900px) {
-    grid-template-columns: auto auto;
-    justify-content: space-between;
+    display: flex;
+    justify-content: flex-start;
     width: min(#{$hero-max}, calc(100% - 1.5rem));
 
     &__links {
       display: none;
     }
+
+    &__actions {
+      margin-inline-start: auto;
+    }
+  }
+}
+
+@keyframes hero-nav-resume-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -46,6 +46,7 @@ export function HeroContent() {
           {pickLocale(heroCopy.viewProjects, locale)}
         </Button>
         <Button
+          id="hero-resume-cta"
           className="hero-content__cta-secondary"
           component={RouterLink}
           to={personal.resume.href}
