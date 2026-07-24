@@ -1,3 +1,4 @@
+@use 'shared/styles/variables' as *;
 @use 'tokens' as *;
 
 .experience {
@@ -75,7 +76,7 @@
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
     &__shell {
       width: min(#{$experience-max}, calc(100% - 1.5rem));
     }
@@ -83,6 +84,13 @@
     &__header {
       align-items: center;
       text-align: center;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &__shell {
+      width: min(#{$experience-max}, calc(100% - 1rem));
+      padding-block: clamp(3rem, 8vh, 5rem);
     }
   }
 }
@@ -93,7 +101,7 @@
     text-align: start;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
     &__header {
       align-items: center;
       text-align: center;

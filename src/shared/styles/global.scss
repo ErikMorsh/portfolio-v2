@@ -12,6 +12,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overflow-x: clip;
 
   &::-webkit-scrollbar {
     display: none;
@@ -20,7 +21,7 @@ html {
 
 body {
   margin: 0;
-  min-width: 320px;
+  overflow-x: clip;
   background-color: var(--app-bg, #0b0a14);
   color: var(--app-ink, #f4f1ff);
   -webkit-font-smoothing: antialiased;

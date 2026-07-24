@@ -1,3 +1,4 @@
+@use 'shared/styles/variables' as *;
 @use 'tokens' as *;
 
 .about-card-scene {
@@ -273,9 +274,9 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: $breakpoint-md) {
   .about-card-scene {
-    max-width: 22rem;
+    max-width: min(100%, 20rem);
   }
 
   .about-card-flip,
@@ -290,6 +291,18 @@
   .about-card__map-shell {
     min-height: 16rem;
     height: 16rem;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .about-card__portrait {
+    width: 120px;
+    height: 120px;
+  }
+
+  .about-card-flip,
+  .about-card {
+    min-height: 24rem;
   }
 }
 

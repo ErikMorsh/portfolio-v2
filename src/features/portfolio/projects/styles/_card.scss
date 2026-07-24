@@ -113,6 +113,9 @@
   }
 
   &__action {
+    min-width: 2.75rem !important;
+    width: 2.75rem !important;
+    height: 2.75rem !important;
     color: var(--app-muted) !important;
     font-size: 1.05rem !important;
 

@@ -1,3 +1,5 @@
+@use 'shared/styles/variables' as *;
+
 .site-footer {
   color: var(--app-muted);
 
@@ -15,6 +17,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    max-width: 100%;
     padding: 0.35rem 0.8rem;
     border: 1px solid var(--app-accent-border);
     border-radius: 999px;
@@ -22,7 +25,6 @@
     color: var(--app-ink);
     font-size: 0.78rem;
     line-height: 1.35;
-    white-space: nowrap;
   }
 
   &__availability-dot {
@@ -41,12 +43,25 @@
     line-height: 1.4 !important;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
     &__shell {
       width: min(1180px, calc(100% - 1.5rem));
       flex-wrap: wrap;
       justify-content: center;
       text-align: center;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &__shell {
+      width: min(1180px, calc(100% - 1rem));
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    &__availability {
+      white-space: normal;
+      text-align: start;
     }
   }
 }

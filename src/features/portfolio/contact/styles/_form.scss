@@ -1,3 +1,4 @@
+@use 'shared/styles/variables' as *;
 @use 'tokens' as *;
 
 .contact-form {
@@ -72,7 +73,7 @@
     min-width: 10rem;
     min-height: 2.75rem !important;
     margin-top: 0.25rem;
-    margin-left: auto;
+    margin-inline-start: auto;
     padding-inline: 1.5rem !important;
     gap: 0.65rem !important;
     border-radius: 0.85rem !important;
@@ -116,9 +117,18 @@
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: $breakpoint-sm) {
     &__row {
       grid-template-columns: 1fr;
     }
+
+    &__submit {
+      width: 100%;
+      min-width: 0;
+    }
   }
+}
+
+[dir='rtl'] .contact-form__submit .MuiButton-endIcon {
+  transform: scaleX(-1) rotate(-45deg);
 }

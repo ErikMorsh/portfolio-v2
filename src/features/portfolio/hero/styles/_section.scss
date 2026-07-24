@@ -1,3 +1,4 @@
+@use 'shared/styles/variables' as *;
 @use 'tokens' as *;
 
 .hero {
@@ -43,15 +44,36 @@
     overflow: visible;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
+    height: auto;
+    min-height: 100dvh;
+
     &__shell {
       width: min(#{$hero-max}, calc(100% - 1.5rem));
+      padding-block: 5rem 2.75rem;
     }
 
     &__stage {
       grid-template-columns: 1fr;
       justify-items: center;
       text-align: center;
+      gap: 1.75rem;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &__shell {
+      width: min(#{$hero-max}, calc(100% - 1rem));
+      padding-block: 4.75rem 2.25rem;
+    }
+  }
+
+  @media (max-height: 700px) {
+    height: auto;
+    min-height: 0;
+
+    &__shell {
+      padding-block: 4.5rem 2rem;
     }
   }
 }

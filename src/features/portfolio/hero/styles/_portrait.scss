@@ -1,3 +1,4 @@
+@use 'shared/styles/variables' as *;
 @use 'tokens' as *;
 
 .hero-portrait {
@@ -67,12 +68,12 @@
 
   &__badge--top {
     top: 0.9rem;
-    right: -2rem;
+    inset-inline-end: 0;
     animation: hero-badge-drift-a 12s ease-in-out infinite;
   }
 
   &__badge--bottom {
-    left: -2rem;
+    inset-inline-start: 0;
     bottom: 1.2rem;
     animation: hero-badge-drift-b 14.5s ease-in-out infinite;
     animation-delay: -4.8s;
@@ -115,21 +116,34 @@
     line-height: 1.2;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
     width: min(100%, 260px);
     order: -1;
 
     &__badge {
+      max-width: min(150px, 46%);
       padding: 0.45rem 0.55rem;
     }
 
     &__badge--top {
-      right: -0.5rem;
+      inset-inline-end: 0;
     }
 
     &__badge--bottom {
-      left: -0.5rem;
+      inset-inline-start: 0;
       bottom: 0.6rem;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    width: min(100%, 220px);
+
+    &__badge-value {
+      font-size: 0.82rem;
+    }
+
+    &__badge-label {
+      font-size: 0.65rem;
     }
   }
 }

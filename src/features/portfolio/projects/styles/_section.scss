@@ -1,3 +1,4 @@
+@use 'shared/styles/variables' as *;
 @use 'tokens' as *;
 
 .projects {
@@ -68,13 +69,7 @@
     }
   }
 
-  @media (max-width: 1000px) {
-    &__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
     &__shell {
       width: min(#{$projects-max}, calc(100% - 1.5rem));
     }
@@ -83,9 +78,18 @@
       align-items: center;
       text-align: center;
     }
+
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: $breakpoint-sm) {
+    &__shell {
+      width: min(#{$projects-max}, calc(100% - 1rem));
+      padding-block: clamp(3rem, 8vh, 5rem);
+    }
+
     &__grid {
       grid-template-columns: 1fr;
     }
@@ -98,7 +102,7 @@
     text-align: start;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
     &__header {
       align-items: center;
       text-align: center;

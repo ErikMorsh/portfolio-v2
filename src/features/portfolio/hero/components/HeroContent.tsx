@@ -30,9 +30,7 @@ export function HeroContent() {
         </span>
       </Typography>
 
-      <div style={{ width: '80%' }}>
-        <HeroTagline />
-      </div>
+      <HeroTagline />
 
       <Typography className="hero-content__description" component="p">
         {pickLocale(heroCopy.description, locale)}

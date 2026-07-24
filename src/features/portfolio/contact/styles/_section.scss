@@ -1,3 +1,4 @@
+@use 'shared/styles/variables' as *;
 @use 'tokens' as *;
 
 .contact {
@@ -64,7 +65,7 @@
     gap: clamp(1.25rem, 3vw, 2rem);
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: $breakpoint-md) {
     &__shell {
       width: min(#{$contact-max}, calc(100% - 1.5rem));
     }
@@ -78,6 +79,13 @@
       grid-template-columns: 1fr;
     }
   }
+
+  @media (max-width: $breakpoint-sm) {
+    &__shell {
+      width: min(#{$contact-max}, calc(100% - 1rem));
+      padding-block: clamp(3rem, 8vh, 5rem);
+    }
+  }
 }
 
 [dir='rtl'] .contact {
@@ -86,7 +94,7 @@
     text-align: start;
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: $breakpoint-md) {
     &__header {
       align-items: center;
       text-align: center;

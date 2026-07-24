@@ -1,4 +1,4 @@
-@use '@/shared/styles/variables' as *;
+@use 'shared/styles/variables' as *;
 @use 'tokens' as *;
 
 .hero-content {
@@ -7,6 +7,7 @@
   align-items: flex-start;
   gap: $space-5;
   min-width: 0;
+  width: 100%;
   animation: hero-rise 700ms $hero-ease both;
 
   &__availability {
@@ -32,30 +33,32 @@
 
   &__title {
     margin: 0;
+    max-width: 100%;
     font-family: 'Syne', 'Vazirmatn', sans-serif;
-    font-size: clamp(2.625rem, 7.5vw, 4.7rem) !important;
+    font-size: clamp(2.1rem, 8vw + 0.35rem, 4.7rem) !important;
     font-weight: 600 !important;
-    line-height: 0.95 !important;
+    line-height: 1.05 !important;
     letter-spacing: -0.03em;
+    overflow-wrap: anywhere;
   }
 
   &__first-name {
     display: block;
     color: var(--hero-ink);
-    font-size: 3.94rem;
+    font-size: inherit;
   }
 
   &__last-name {
     display: block;
     color: var(--hero-accent);
-    font-size: 3.94rem;
+    font-size: inherit;
   }
 
   &__tagline {
     margin: 0;
-    width: 80%;
+    width: 100%;
+    max-width: 36rem;
     color: var(--hero-muted);
-    
   }
 
   &__tagline-typed {
@@ -71,7 +74,8 @@
 
   &__description {
     margin: 0;
-    max-width: 70%;
+    width: 100%;
+    max-width: 36rem;
     color: var(--hero-muted);
   }
 
@@ -115,16 +119,27 @@
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
     align-items: center;
-
-    &__tagline,
-    &__description {
-      width: 80%;
-    }
 
     &__actions {
       justify-content: center;
+    }
+
+    &__cta-primary,
+    &__cta-secondary {
+      flex: 1 1 auto;
+      justify-content: center;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    gap: $space-4;
+
+    &__availability {
+      font-size: 0.75rem;
+      padding: 0.4rem 0.75rem;
     }
   }
 }
@@ -132,7 +147,7 @@
 [dir='rtl'] .hero-content {
   align-items: flex-start;
 
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
     align-items: center;
   }
 }

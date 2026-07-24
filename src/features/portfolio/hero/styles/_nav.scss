@@ -1,4 +1,4 @@
-@use '@/shared/styles/variables' as *;
+@use 'shared/styles/variables' as *;
 @use 'tokens' as *;
 
 .hero-nav-dock {
@@ -52,7 +52,8 @@
     display: inline-flex !important;
     align-items: center;
     gap: 0.35rem;
-    min-height: 2.5rem;
+    min-height: 2.75rem;
+    max-width: 11rem;
     padding-inline: 0.85rem !important;
     border-radius: 0.75rem !important;
     border: 1px solid var(--hero-accent-border) !important;
@@ -61,6 +62,8 @@
     font-weight: 600 !important;
     text-transform: none !important;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &:hover {
       border-color: var(--hero-accent) !important;
@@ -81,18 +84,21 @@
 
   &__link {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-block: 0.55rem;
     color: var(--hero-muted);
     text-decoration: none;
     font-size: 0.92rem;
     font-weight: 500;
-    padding-block: 0.35rem;
     transition: color 180ms $hero-ease;
 
     &::after {
       content: '';
       position: absolute;
       inset-inline: 0.15rem;
-      bottom: 0;
+      bottom: 0.2rem;
       height: 2px;
       border-radius: 999px;
       background: var(--hero-accent);
@@ -119,9 +125,9 @@
   }
 
   &__icon-btn {
-    min-width: 2.5rem !important;
-    width: 2.5rem;
-    height: 2.5rem;
+    min-width: 2.75rem !important;
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: 0.75rem !important;
     border: 1px solid var(--hero-accent-border) !important;
     color: var(--hero-ink) !important;
@@ -132,17 +138,63 @@
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: flex-start;
+    gap: 0.65rem $space-3;
     width: min(#{$hero-max}, calc(100% - 1.5rem));
 
     &__links {
-      display: none;
+      order: 3;
+      flex: 1 1 100%;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: 0.35rem;
+      margin-inline: -0.15rem;
+      padding-inline: 0.15rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &__link {
+      flex-shrink: 0;
+      min-height: 2.5rem;
+      padding-inline: 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--app-border);
+      background: var(--app-input-bg);
+      font-size: 0.82rem;
+
+      &::after {
+        display: none;
+      }
+
+      &--active {
+        border-color: var(--hero-accent-border);
+        background: var(--hero-accent-soft);
+        color: var(--hero-ink);
+      }
     }
 
     &__actions {
       margin-inline-start: auto;
     }
+
+    &__resume {
+      max-width: 9.5rem;
+      min-height: 2.5rem;
+      font-size: 0.82rem;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    width: min(#{$hero-max}, calc(100% - 1rem));
   }
 }
