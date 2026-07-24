@@ -1,4 +1,5 @@
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded'
+import CodeRoundedIcon from '@mui/icons-material/CodeRounded'
 import DashboardCustomizeRoundedIcon from '@mui/icons-material/DashboardCustomizeRounded'
 import SyncAltRoundedIcon from '@mui/icons-material/SyncAltRounded'
 import WebRoundedIcon from '@mui/icons-material/WebRounded'
@@ -10,4 +11,5 @@ export const projectIconMap: Record<ProjectsShowcaseIcon, SvgIconComponent> = {
   chat: ChatRoundedIcon,
   cms: WebRoundedIcon,
   migration: SyncAltRoundedIcon,
+  portfolio: CodeRoundedIcon,
 }

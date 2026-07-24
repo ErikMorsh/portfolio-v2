@@ -1,4 +1,5 @@
 import GitHubIcon from '@mui/icons-material/GitHub'
+import LanguageRoundedIcon from '@mui/icons-material/LanguageRounded'
 import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded'
 import { Box, IconButton, Typography } from '@mui/material'
 import Link from 'next/link'
@@ -17,9 +18,15 @@ export function ProjectsCard({ item }: ProjectsCardProps) {
   const { locale } = useAppTheme()
   const project = getProjectById(item.id)
   const job = getJobForProject(item.id)
-  const title = project ? pickLocale(project.title, locale) : item.id
+  const title = item.title
+    ? pickLocale(item.title, locale)
+    : project
+      ? pickLocale(project.title, locale)
+      : item.id
   const detailHref =
-    job != null ? projectPaths.detail(job.id, item.id) : undefined
+    !item.hideDetailLink && job != null
+      ? projectPaths.detail(job.id, item.id)
+      : undefined
   const Icon = projectIconMap[item.icon]
 
   return (
@@ -72,23 +79,24 @@ export function ProjectsCard({ item }: ProjectsCardProps) {
               <GitHubIcon fontSize="inherit" />
             </IconButton>
           ) : null}
-          {detailHref ? (
-            <IconButton
-              className="projects-card__action"
-              component={Link}
-              href={detailHref}
-              size="small"
-              aria-label={`${pickLocale(projectsCopy.viewDetails, locale)}: ${title}`}
-            >
-              <OpenInNewRoundedIcon fontSize="inherit" />
-            </IconButton>
-          ) : item.liveUrl ? (
+          {item.liveUrl ? (
             <IconButton
               className="projects-card__action"
               component="a"
               href={item.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
+              size="small"
+              aria-label={`${pickLocale(projectsCopy.liveWebsite, locale)}: ${title}`}
+            >
+              <LanguageRoundedIcon fontSize="inherit" />
+            </IconButton>
+          ) : null}
+          {detailHref ? (
+            <IconButton
+              className="projects-card__action"
+              component={Link}
+              href={detailHref}
               size="small"
               aria-label={`${pickLocale(projectsCopy.viewDetails, locale)}: ${title}`}
             >
