@@ -5,6 +5,8 @@ import {
   checkRateLimit,
   clientIpFromHeaders,
 } from '@/features/portfolio/contact/lib/rate-limit'
+import { RECAPTCHA_ACTIONS } from '@/features/portfolio/contact/lib/recaptcha-actions'
+import { verifyRecaptchaToken } from '@/features/portfolio/contact/lib/verify-recaptcha'
 
 export const runtime = 'nodejs'
 
@@ -37,6 +39,14 @@ export async function POST(request: Request) {
   }
 
   const data = parsed.data
+
+  const captcha = await verifyRecaptchaToken(data.recaptchaToken, {
+    expectedAction: RECAPTCHA_ACTIONS.contact,
+  })
+  if (!captcha.ok) {
+    return NextResponse.json({ error: captcha.error }, { status: 403 })
+  }
+
   if (data.hp_company) {
     // Honeypot tripped — pretend success (no id = not persisted)
     console.warn('[contact] honeypot tripped; skipping insert')

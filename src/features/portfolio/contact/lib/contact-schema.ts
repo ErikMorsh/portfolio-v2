@@ -7,6 +7,8 @@ export const contactMessageSchema = z.object({
   phone: z.string().trim().max(40).optional().default(''),
   subject: z.string().trim().max(160).optional().default(''),
   message: z.string().trim().min(1).max(5000),
+  /** Google reCAPTCHA v3 token — required only when enabled in production */
+  recaptchaToken: z.string().trim().optional().default(''),
   /** Honeypot — bots fill this; browsers must not autofill it */
   hp_company: z.string().optional().default(''),
 })

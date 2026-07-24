@@ -3,10 +3,16 @@ import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded'
 import SendRoundedIcon from '@mui/icons-material/SendRounded'
 import { Box, Button } from '@mui/material'
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { pickLocale } from '@/cv-data'
 import { useAppTheme } from '@/theme'
 import { contactCopy } from '../data/contact'
+import {
+  getRecaptchaToken,
+  isRecaptchaEnabled,
+  loadRecaptcha,
+  RECAPTCHA_ACTIONS,
+} from '../lib/recaptcha-client'
 
 type ContactFormState = {
   firstName: string
@@ -39,6 +45,13 @@ export function ContactForm() {
   const isPending = status !== 'idle'
   const isBusy = status === 'loading'
 
+  useEffect(() => {
+    if (!isRecaptchaEnabled()) return
+    void loadRecaptcha(locale).catch(() => {
+      // Script will retry on submit if preload fails
+    })
+  }, [locale])
+
   const update =
     (field: keyof ContactFormState) =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -56,6 +69,13 @@ export function ContactForm() {
     setErrorMessage(null)
 
     try {
+      let recaptchaToken: string
+      try {
+        recaptchaToken = await getRecaptchaToken(locale, RECAPTCHA_ACTIONS.contact)
+      } catch {
+        throw new Error(pickLocale(contactCopy.form.captchaError, locale))
+      }
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -69,6 +89,7 @@ export function ContactForm() {
             pickLocale(contactCopy.form.subjectPlaceholder, locale),
           message: form.message,
           hp_company: form.hp_company,
+          recaptchaToken,
         }),
       })
 
@@ -79,6 +100,9 @@ export function ContactForm() {
       } | null
 
       if (!response.ok) {
+        if (response.status === 403) {
+          throw new Error(pickLocale(contactCopy.form.captchaError, locale))
+        }
         throw new Error(
           data?.error || pickLocale(contactCopy.form.error, locale),
         )
@@ -215,20 +239,45 @@ export function ContactForm() {
         />
       </label>
 
-      <Button
-        className="contact-form__submit"
-        type="submit"
-        variant="contained"
-        sx={{ gap: '6px !important' }}
-        endIcon={
-          <SendRoundedIcon
-            sx={{ transform: 'skewX(15deg) rotate(-90deg)', marginTop: '-0.4rem' }}
-          />
-        }
-        disabled={isPending}
-      >
-        {pickLocale(contactCopy.form.submit, locale)}
-      </Button>
+      <Box className="contact-form__footer">
+        {isRecaptchaEnabled() ? (
+          <p className="contact-form__captcha-note">
+            {pickLocale(contactCopy.form.captchaNotice, locale)}{' '}
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {pickLocale(contactCopy.form.captchaPrivacy, locale)}
+            </a>
+            {' · '}
+            <a
+              href="https://policies.google.com/terms"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {pickLocale(contactCopy.form.captchaTerms, locale)}
+            </a>
+          </p>
+        ) : (
+          <span />
+        )}
+
+        <Button
+          className="contact-form__submit"
+          type="submit"
+          variant="contained"
+          sx={{ gap: '6px !important' }}
+          endIcon={
+            <SendRoundedIcon
+              sx={{ transform: 'skewX(15deg) rotate(-90deg)', marginTop: '-0.4rem' }}
+            />
+          }
+          disabled={isPending}
+        >
+          {pickLocale(contactCopy.form.submit, locale)}
+        </Button>
+      </Box>
 
       {isPending ? (
         <div

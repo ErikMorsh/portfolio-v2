@@ -95,6 +95,16 @@ export const contactCopy = {
       en: 'Could not send your message. Please try again.',
     },
     retry: { fa: 'تلاش دوباره', en: 'Try again' },
+    captchaError: {
+      fa: 'تأیید امنیتی انجام نشد. دوباره تلاش کن.',
+      en: 'Security check failed. Please try again.',
+    },
+    captchaNotice: {
+      fa: 'این فرم با reCAPTCHA محافظت می‌شود.',
+      en: 'This form is protected by reCAPTCHA.',
+    },
+    captchaPrivacy: { fa: 'حریم خصوصی', en: 'Privacy' },
+    captchaTerms: { fa: 'شرایط', en: 'Terms' },
   },
 } as const
 

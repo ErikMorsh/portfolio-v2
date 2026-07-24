@@ -53,8 +53,35 @@
   font-size: 0.85rem;
 }
 
-.login-form__submit {
+.login-form__footer {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
   margin-top: 0.25rem;
+}
+
+.login-form__captcha-note {
+  margin: 0;
+  max-width: 11rem;
+  color: rgba(243, 244, 248, 0.45);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.login-form__captcha-note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.login-form__captcha-note a:hover {
+  color: rgba(243, 244, 248, 0.72);
+}
+
+.login-form__submit {
+  flex-shrink: 0;
   border: 0;
   border-radius: 0.5rem;
   background: #7c8cff;
@@ -67,4 +94,15 @@
 .login-form__submit:disabled {
   opacity: 0.7;
   cursor: wait;
+}
+
+@media (max-width: 420px) {
+  .login-form__footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .login-form__captcha-note {
+    max-width: none;
+  }
 }
