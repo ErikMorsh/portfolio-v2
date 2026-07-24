@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { db, messages } from '@/db'
+import { getDatabase, messages } from '@/db'
 import { contactMessageSchema } from '@/features/portfolio/contact/lib/contact-schema'
 import {
   checkRateLimit,
@@ -9,6 +9,7 @@ import { RECAPTCHA_ACTIONS } from '@/features/portfolio/contact/lib/recaptcha-ac
 import { verifyRecaptchaToken } from '@/features/portfolio/contact/lib/verify-recaptcha'
 
 export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
   const ip = clientIpFromHeaders(request.headers)
@@ -56,6 +57,7 @@ export async function POST(request: Request) {
   const subject = data.subject || 'Project Inquiry'
 
   try {
+    const db = await getDatabase()
     const [row] = await db
       .insert(messages)
       .values({

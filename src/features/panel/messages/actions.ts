@@ -4,7 +4,7 @@ import { count, desc, eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth'
-import { db, messages, type Message } from '@/db'
+import { getDatabase, messages, type Message } from '@/db'
 
 async function requireAdmin() {
   const session = await auth()
@@ -16,17 +16,20 @@ async function requireAdmin() {
 
 export async function listMessages(): Promise<Message[]> {
   await requireAdmin()
+  const db = await getDatabase()
   return db.select().from(messages).orderBy(desc(messages.createdAt))
 }
 
 export async function getMessage(id: string): Promise<Message | null> {
   await requireAdmin()
+  const db = await getDatabase()
   const [row] = await db.select().from(messages).where(eq(messages.id, id)).limit(1)
   return row ?? null
 }
 
 export async function markMessageStatus(id: string, status: 'read' | 'unread') {
   await requireAdmin()
+  const db = await getDatabase()
   await db.update(messages).set({ status }).where(eq(messages.id, id))
   revalidatePath('/admin/messages')
   revalidatePath(`/admin/messages/${id}`)
@@ -35,6 +38,7 @@ export async function markMessageStatus(id: string, status: 'read' | 'unread') {
 /** Mark unread → read during page load (no revalidatePath — unsafe during render). */
 export async function markMessageReadOnView(id: string) {
   await requireAdmin()
+  const db = await getDatabase()
   await db
     .update(messages)
     .set({ status: 'read' })
@@ -43,6 +47,7 @@ export async function markMessageReadOnView(id: string) {
 
 export async function deleteMessage(id: string) {
   await requireAdmin()
+  const db = await getDatabase()
   await db.delete(messages).where(eq(messages.id, id))
   revalidatePath('/admin/messages')
   redirect('/admin/messages')
@@ -50,6 +55,7 @@ export async function deleteMessage(id: string) {
 
 export async function countUnread(): Promise<number> {
   await requireAdmin()
+  const db = await getDatabase()
   const [row] = await db
     .select({ value: count() })
     .from(messages)
