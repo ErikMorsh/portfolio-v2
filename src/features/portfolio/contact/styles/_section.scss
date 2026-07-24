@@ -67,7 +67,7 @@
 
   @media (max-width: $breakpoint-md) {
     &__shell {
-      width: min(#{$contact-max}, calc(100% - 1.5rem));
+      width: min(#{$contact-max}, 100%);
     }
 
     &__header {
@@ -82,7 +82,7 @@
 
   @media (max-width: $breakpoint-sm) {
     &__shell {
-      width: min(#{$contact-max}, calc(100% - 1rem));
+      width: min(#{$contact-max}, 100%);
       padding-block: clamp(3rem, 8vh, 5rem);
     }
   }

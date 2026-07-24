@@ -60,7 +60,9 @@
       "skills": "مهارت‌ها",
       "projects": "پروژه‌ها",
       "experience": "سوابق",
-      "contact": "تماس"
+      "contact": "تماس",
+      "openMenu": "باز کردن منو",
+      "closeMenu": "بستن منو"
     }
   },
   "about": {

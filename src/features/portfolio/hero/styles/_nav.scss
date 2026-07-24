@@ -26,16 +26,22 @@
     backdrop-filter 220ms $hero-ease,
     -webkit-backdrop-filter 220ms $hero-ease;
 
-  &--scrolled {
+  &--scrolled,
+  &--menu-open {
     background: var(--app-surface-elevated);
     border-bottom-color: var(--app-border);
     box-shadow: var(--app-shadow);
     backdrop-filter: blur(18px) saturate(1.35);
     -webkit-backdrop-filter: blur(18px) saturate(1.35);
   }
+
+  @media (max-width: $breakpoint-md) {
+    padding-inline: 16px;
+  }
 }
 
 .hero-nav {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -46,6 +52,20 @@
 
   &--with-resume {
     grid-template-columns: auto 1fr auto;
+  }
+
+  &__leading {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &--with-resume &__leading {
+    display: flex;
+  }
+
+  &__resume-wrap {
+    display: flex;
   }
 
   &__resume {
@@ -80,6 +100,10 @@
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  &__links--mobile {
+    display: none;
   }
 
   &__link {
@@ -124,7 +148,8 @@
     gap: 0.5rem;
   }
 
-  &__icon-btn {
+  &__icon-btn,
+  &__menu-btn {
     min-width: 2.75rem !important;
     width: 2.75rem;
     height: 2.75rem;
@@ -138,52 +163,46 @@
     }
   }
 
+  &__menu-btn {
+    display: none !important;
+  }
+
+  &__panel {
+    display: none !important;
+  }
+
   @media (max-width: $breakpoint-md) {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
     gap: 0.65rem $space-3;
-    width: min(#{$hero-max}, calc(100% - 1.5rem));
+    width: min(#{$hero-max}, 100%);
 
-    &__links {
-      order: 3;
-      flex: 1 1 100%;
-      justify-content: flex-start;
-      flex-wrap: nowrap;
-      gap: 0.35rem;
-      margin-inline: -0.15rem;
-      padding-inline: 0.15rem;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
+    &__leading {
+      display: flex;
+      order: 1;
+      margin-inline-start: 0;
     }
 
-    &__link {
-      flex-shrink: 0;
-      min-height: 2.5rem;
-      padding-inline: 0.7rem;
-      border-radius: 999px;
-      border: 1px solid var(--app-border);
-      background: var(--app-input-bg);
-      font-size: 0.82rem;
+    &__links--desktop {
+      display: none !important;
+    }
 
-      &::after {
-        display: none;
-      }
+    &__links--mobile {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.35rem;
+      width: 100%;
+    }
 
-      &--active {
-        border-color: var(--hero-accent-border);
-        background: var(--hero-accent-soft);
-        color: var(--hero-ink);
-      }
+    &__menu-btn {
+      display: inline-flex !important;
     }
 
     &__actions {
+      order: 2;
       margin-inline-start: auto;
     }
 
@@ -192,9 +211,59 @@
       min-height: 2.5rem;
       font-size: 0.82rem;
     }
+
+    &__icon-btn,
+    &__menu-btn {
+      min-width: 2.5rem !important;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    &__panel {
+      display: block !important;
+      order: 3;
+      flex: 1 1 100%;
+      width: 100%;
+      padding-top: 0.35rem;
+    }
+
+    &__link--mobile {
+      width: 100%;
+      min-height: 2.75rem;
+      justify-content: flex-start;
+      padding: 0.7rem 0.9rem;
+      border-radius: 0.85rem;
+      border: 1px solid var(--app-border);
+      background: var(--app-input-bg);
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-align: start;
+      transition:
+        color 180ms $hero-ease,
+        background-color 180ms $hero-ease,
+        border-color 180ms $hero-ease;
+
+      &::after {
+        display: none;
+      }
+
+      &:hover {
+        border-color: var(--hero-accent-border);
+        background: var(--hero-accent-soft);
+        color: var(--hero-ink);
+      }
+
+      &.hero-nav__link--active {
+        border-color: var(--hero-accent);
+        border-inline-start-width: 3px;
+        border-inline-start-color: var(--hero-accent);
+        background: var(--hero-accent-soft);
+        color: var(--hero-accent);
+      }
+    }
   }
 
   @media (max-width: $breakpoint-sm) {
-    width: min(#{$hero-max}, calc(100% - 1rem));
+    width: min(#{$hero-max}, 100%);
   }
 }

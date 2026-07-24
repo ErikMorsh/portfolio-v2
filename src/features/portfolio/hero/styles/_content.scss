@@ -122,6 +122,21 @@
   @media (max-width: $breakpoint-md) {
     align-items: center;
 
+    &__availability {
+      font-size: 0.75rem;
+      padding: 0.4rem 0.75rem;
+      text-align: center;
+    }
+
+    &__first-name,
+    &__last-name {
+      display: inline;
+    }
+
+    &__first-name {
+      margin-inline-end: 0.35em;
+    }
+
     &__actions {
       justify-content: center;
     }
@@ -136,11 +151,6 @@
 
   @media (max-width: $breakpoint-sm) {
     gap: $space-4;
-
-    &__availability {
-      font-size: 0.75rem;
-      padding: 0.4rem 0.75rem;
-    }
   }
 }
 

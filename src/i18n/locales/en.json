@@ -60,7 +60,9 @@
       "skills": "Skills",
       "projects": "Projects",
       "experience": "Experience",
-      "contact": "Contact"
+      "contact": "Contact",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
     }
   },
   "about": {

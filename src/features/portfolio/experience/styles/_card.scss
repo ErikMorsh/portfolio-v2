@@ -168,6 +168,15 @@
     line-height: 1.2;
   }
 
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+
+    &__dot {
+      display: none;
+    }
+  }
+
   @media (max-width: $breakpoint-sm) {
     &__header {
       flex-direction: column;

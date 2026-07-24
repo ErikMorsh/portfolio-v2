@@ -45,7 +45,7 @@
 
   @media (max-width: $breakpoint-md) {
     &__shell {
-      width: min(1180px, calc(100% - 1.5rem));
+      width: min(1180px, 100%);
       flex-wrap: wrap;
       justify-content: center;
       text-align: center;
@@ -54,7 +54,7 @@
 
   @media (max-width: $breakpoint-sm) {
     &__shell {
-      width: min(1180px, calc(100% - 1rem));
+      width: min(1180px, 100%);
       flex-direction: column;
       gap: 0.75rem;
     }

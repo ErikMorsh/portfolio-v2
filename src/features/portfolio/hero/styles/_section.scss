@@ -45,11 +45,13 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    height: auto;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
     min-height: 100dvh;
 
     &__shell {
-      width: min(#{$hero-max}, calc(100% - 1.5rem));
+      width: min(#{$hero-max}, 100%);
       padding-block: 5rem 2.75rem;
     }
 
@@ -63,12 +65,12 @@
 
   @media (max-width: $breakpoint-sm) {
     &__shell {
-      width: min(#{$hero-max}, calc(100% - 1rem));
+      width: min(#{$hero-max}, 100%);
       padding-block: 4.75rem 2.25rem;
     }
   }
 
-  @media (max-height: 700px) {
+  @media (max-height: 700px) and (min-width: #{$breakpoint-md + 1px}) {
     height: auto;
     min-height: 0;
 

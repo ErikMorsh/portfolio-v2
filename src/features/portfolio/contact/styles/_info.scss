@@ -141,8 +141,9 @@
 
   &__social-btn {
     display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0;
     min-width: 2.45rem !important;
     height: 2.45rem !important;
     padding: 0 0.65rem !important;
@@ -160,7 +161,8 @@
       border-color 0.28s $contact-ease,
       background-color 0.28s $contact-ease,
       color 0.28s $contact-ease,
-      padding 0.35s $contact-ease;
+      padding 0.35s $contact-ease,
+      gap 0.35s $contact-ease;
 
     &:hover,
     &:focus-visible {
@@ -172,35 +174,43 @@
 
   &__social-icon {
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
     font-size: 1.1rem;
     line-height: 0;
+
+    .MuiSvgIcon-root {
+      display: block;
+      font-size: inherit;
+    }
   }
 
   &__social-label {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     max-width: 0;
-    margin-inline-start: 0;
+    margin: 0;
     overflow: hidden;
     opacity: 0;
     white-space: nowrap;
     font-size: 0.8rem;
     letter-spacing: 0.01em;
+    line-height: 1;
     direction: ltr;
     transition:
       max-width 0.35s $contact-ease,
-      margin-inline-start 0.35s $contact-ease,
       opacity 0.25s $contact-ease;
   }
 
   @media (hover: hover) and (pointer: fine) {
     &__social-btn:hover,
     &__social-btn:focus-visible {
+      gap: 0.55rem;
       padding-inline-end: 0.85rem !important;
 
       .contact-info__social-label {
         max-width: 14rem;
-        margin-inline-start: 0.5rem;
         opacity: 1;
       }
     }
@@ -214,11 +224,11 @@
 
     &__social-label {
       max-width: 0;
-      margin-inline-start: 0;
       opacity: 0;
     }
 
     &__social-btn {
+      gap: 0;
       padding-inline-end: 0.55rem !important;
     }
   }
@@ -226,11 +236,11 @@
   @media (max-width: $breakpoint-sm) {
     &__social-label {
       max-width: 14rem;
-      margin-inline-start: 0.5rem;
       opacity: 1;
     }
 
     &__social-btn {
+      gap: 0.55rem;
       padding-inline-end: 0.85rem !important;
     }
   }

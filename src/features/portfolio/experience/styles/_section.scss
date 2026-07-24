@@ -78,18 +78,22 @@
 
   @media (max-width: $breakpoint-md) {
     &__shell {
-      width: min(#{$experience-max}, calc(100% - 1.5rem));
+      width: min(#{$experience-max}, 100%);
     }
 
     &__header {
       align-items: center;
       text-align: center;
     }
+
+    &__timeline::before {
+      display: none;
+    }
   }
 
   @media (max-width: $breakpoint-sm) {
     &__shell {
-      width: min(#{$experience-max}, calc(100% - 1rem));
+      width: min(#{$experience-max}, 100%);
       padding-block: clamp(3rem, 8vh, 5rem);
     }
   }
