@@ -66,6 +66,16 @@
       opacity: 0.72;
       cursor: not-allowed;
     }
+
+    &--invalid {
+      border-color: color-mix(in srgb, #ef4444 55%, var(--app-border-strong));
+      background: color-mix(in srgb, #ef4444 8%, var(--app-input-bg));
+
+      &:focus {
+        border-color: #ef4444;
+        background: color-mix(in srgb, #ef4444 10%, var(--app-input-bg));
+      }
+    }
   }
 
   &__input {
@@ -161,6 +171,12 @@
     gap: 0.65rem;
     width: min(100%, 18.5rem);
     text-align: center;
+
+    &--wide {
+      width: min(100%, 22rem);
+      align-items: stretch;
+      text-align: start;
+    }
   }
 
   &__overlay-title {
@@ -172,11 +188,50 @@
     line-height: 1.25;
   }
 
+  &__overlay-card--wide &__overlay-title,
+  &__overlay-card--wide &__status-icon,
+  &__overlay-card--wide &__retry {
+    align-self: center;
+    text-align: center;
+  }
+
   &__overlay-text {
     margin: 0;
     color: var(--app-muted);
     font-size: 0.88rem;
     line-height: 1.45;
+  }
+
+  &__error-list {
+    margin: 0;
+    padding: 0.65rem 0.85rem;
+    list-style: none;
+    border: 1px solid color-mix(in srgb, #ef4444 22%, var(--app-border));
+    border-radius: 0.85rem;
+    background: color-mix(in srgb, #ef4444 7%, var(--contact-card));
+
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      padding-block: 0.45rem;
+
+      + li {
+        border-top: 1px solid color-mix(in srgb, #ef4444 14%, var(--app-border));
+      }
+    }
+  }
+
+  &__error-field {
+    color: var(--contact-ink);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  &__error-message {
+    color: var(--app-muted);
+    font-size: 0.8rem;
+    line-height: 1.4;
   }
 
   &__spinner {

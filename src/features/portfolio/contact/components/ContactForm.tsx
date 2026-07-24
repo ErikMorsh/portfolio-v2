@@ -13,6 +13,12 @@ import {
   loadRecaptcha,
   RECAPTCHA_ACTIONS,
 } from '../lib/recaptcha-client'
+import {
+  localizeFieldErrorMap,
+  validateContactForm,
+  type ContactFieldError,
+  type ContactFieldKey,
+} from '../lib/validate-contact-form'
 
 type ContactFormState = {
   firstName: string
@@ -41,9 +47,11 @@ export function ContactForm() {
   const [form, setForm] = useState<ContactFormState>(initialState)
   const [status, setStatus] = useState<SubmitStatus>('idle')
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<ContactFieldError[]>([])
 
   const isPending = status !== 'idle'
   const isBusy = status === 'loading'
+  const invalidFields = new Set(fieldErrors.map((error) => error.field))
 
   useEffect(() => {
     if (!isRecaptchaEnabled()) return
@@ -56,6 +64,11 @@ export function ContactForm() {
     (field: keyof ContactFormState) =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setForm((current) => ({ ...current, [field]: event.target.value }))
+      if (field !== 'hp_company') {
+        setFieldErrors((current) =>
+          current.filter((error) => error.field !== field),
+        )
+      }
     }
 
   const dismissOverlay = () => {
@@ -63,10 +76,35 @@ export function ContactForm() {
     setErrorMessage(null)
   }
 
+  const showValidationErrors = (errors: ContactFieldError[]) => {
+    setFieldErrors(errors)
+    setErrorMessage(null)
+    setStatus('error')
+  }
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setStatus('loading')
     setErrorMessage(null)
+
+    const validation = validateContactForm(
+      {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        phone: form.phone,
+        subject: form.subject,
+        message: form.message,
+      },
+      locale,
+    )
+
+    if (!validation.ok) {
+      showValidationErrors(validation.errors)
+      return
+    }
+
+    setFieldErrors([])
+    setStatus('loading')
 
     try {
       let recaptchaToken: string
@@ -97,12 +135,28 @@ export function ContactForm() {
         error?: string
         ok?: boolean
         id?: string
+        issues?: {
+          fieldErrors?: Record<string, string[] | undefined>
+        }
       } | null
 
       if (!response.ok) {
         if (response.status === 403) {
           throw new Error(pickLocale(contactCopy.form.captchaError, locale))
         }
+
+        if (response.status === 400 && data?.issues?.fieldErrors) {
+          const errors = localizeFieldErrorMap(
+            data.issues.fieldErrors,
+            form,
+            locale,
+          )
+          if (errors.length > 0) {
+            showValidationErrors(errors)
+            return
+          }
+        }
+
         throw new Error(
           data?.error || pickLocale(contactCopy.form.error, locale),
         )
@@ -114,6 +168,7 @@ export function ContactForm() {
       }
 
       setForm(initialState)
+      setFieldErrors([])
       setStatus('success')
     } catch (error) {
       // Keep form values so the user can retry without retyping
@@ -125,6 +180,13 @@ export function ContactForm() {
       )
     }
   }
+
+  const fieldClass = (field: ContactFieldKey) =>
+    `contact-form__input${invalidFields.has(field) ? ' contact-form__input--invalid' : ''}`
+
+  const textareaClass = `contact-form__textarea${
+    invalidFields.has('message') ? ' contact-form__textarea--invalid' : ''
+  }`
 
   return (
     <Box
@@ -151,13 +213,14 @@ export function ContactForm() {
             {pickLocale(contactCopy.form.firstName, locale)}
           </span>
           <input
-            className="contact-form__input"
+            className={fieldClass('firstName')}
             name="firstName"
             autoComplete="given-name"
             placeholder={pickLocale(contactCopy.form.firstNamePlaceholder, locale)}
             value={form.firstName}
             onChange={update('firstName')}
             disabled={isPending}
+            aria-invalid={invalidFields.has('firstName')}
           />
         </label>
         <label className="contact-form__field">
@@ -165,13 +228,14 @@ export function ContactForm() {
             {pickLocale(contactCopy.form.lastName, locale)}
           </span>
           <input
-            className="contact-form__input"
+            className={fieldClass('lastName')}
             name="lastName"
             autoComplete="family-name"
             placeholder={pickLocale(contactCopy.form.lastNamePlaceholder, locale)}
             value={form.lastName}
             onChange={update('lastName')}
             disabled={isPending}
+            aria-invalid={invalidFields.has('lastName')}
           />
         </label>
       </Box>
@@ -181,7 +245,7 @@ export function ContactForm() {
           {pickLocale(contactCopy.form.email, locale)}
         </span>
         <input
-          className="contact-form__input"
+          className={fieldClass('email')}
           type="email"
           name="email"
           required
@@ -190,6 +254,7 @@ export function ContactForm() {
           value={form.email}
           onChange={update('email')}
           disabled={isPending}
+          aria-invalid={invalidFields.has('email')}
         />
       </label>
 
@@ -198,7 +263,7 @@ export function ContactForm() {
           {pickLocale(contactCopy.form.phone, locale)}
         </span>
         <input
-          className="contact-form__input"
+          className={fieldClass('phone')}
           type="tel"
           name="phone"
           autoComplete="tel"
@@ -206,6 +271,7 @@ export function ContactForm() {
           value={form.phone}
           onChange={update('phone')}
           disabled={isPending}
+          aria-invalid={invalidFields.has('phone')}
         />
       </label>
 
@@ -214,12 +280,13 @@ export function ContactForm() {
           {pickLocale(contactCopy.form.subject, locale)}
         </span>
         <input
-          className="contact-form__input"
+          className={fieldClass('subject')}
           name="subject"
           placeholder={pickLocale(contactCopy.form.subjectPlaceholder, locale)}
           value={form.subject}
           onChange={update('subject')}
           disabled={isPending}
+          aria-invalid={invalidFields.has('subject')}
         />
       </label>
 
@@ -228,7 +295,7 @@ export function ContactForm() {
           {pickLocale(contactCopy.form.message, locale)}
         </span>
         <textarea
-          className="contact-form__textarea"
+          className={textareaClass}
           name="message"
           required
           rows={5}
@@ -236,6 +303,7 @@ export function ContactForm() {
           value={form.message}
           onChange={update('message')}
           disabled={isPending}
+          aria-invalid={invalidFields.has('message')}
         />
       </label>
 
@@ -285,7 +353,11 @@ export function ContactForm() {
           role={status === 'error' ? 'alert' : 'status'}
           aria-live="polite"
         >
-          <div className="contact-form__overlay-card">
+          <div
+            className={`contact-form__overlay-card${
+              fieldErrors.length > 0 ? ' contact-form__overlay-card--wide' : ''
+            }`}
+          >
             {status === 'loading' ? (
               <>
                 <div className="contact-form__spinner" aria-hidden />
@@ -318,11 +390,33 @@ export function ContactForm() {
                   <ErrorOutlineRoundedIcon fontSize="inherit" />
                 </div>
                 <p className="contact-form__overlay-title">
-                  {pickLocale(contactCopy.form.errorTitle, locale)}
+                  {fieldErrors.length > 0
+                    ? pickLocale(contactCopy.form.validationTitle, locale)
+                    : pickLocale(contactCopy.form.errorTitle, locale)}
                 </p>
-                <p className="contact-form__overlay-text">
-                  {errorMessage ?? pickLocale(contactCopy.form.error, locale)}
-                </p>
+                {fieldErrors.length > 0 ? (
+                  <>
+                    <p className="contact-form__overlay-text">
+                      {pickLocale(contactCopy.form.validationIntro, locale)}
+                    </p>
+                    <ul className="contact-form__error-list">
+                      {fieldErrors.map((error) => (
+                        <li key={error.field}>
+                          <span className="contact-form__error-field">
+                            {error.label}
+                          </span>
+                          <span className="contact-form__error-message">
+                            {error.message}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <p className="contact-form__overlay-text">
+                    {errorMessage ?? pickLocale(contactCopy.form.error, locale)}
+                  </p>
+                )}
                 <Button
                   className="contact-form__retry"
                   type="button"

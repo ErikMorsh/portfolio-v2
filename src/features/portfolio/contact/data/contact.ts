@@ -94,6 +94,14 @@ export const contactCopy = {
       fa: 'ارسال پیام ممکن نشد. دوباره تلاش کن.',
       en: 'Could not send your message. Please try again.',
     },
+    validationTitle: {
+      fa: 'لطفاً این موارد را اصلاح کن',
+      en: 'Please fix these fields',
+    },
+    validationIntro: {
+      fa: 'فرم هنوز کامل یا معتبر نیست:',
+      en: 'The form has invalid or missing values:',
+    },
     retry: { fa: 'تلاش دوباره', en: 'Try again' },
     captchaError: {
       fa: 'تأیید امنیتی انجام نشد. دوباره تلاش کن.',
@@ -105,6 +113,42 @@ export const contactCopy = {
     },
     captchaPrivacy: { fa: 'حریم خصوصی', en: 'Privacy' },
     captchaTerms: { fa: 'شرایط', en: 'Terms' },
+    validation: {
+      emailRequired: { fa: 'ایمیل الزامی است', en: 'Email is required' },
+      emailInvalid: {
+        fa: 'ایمیل معتبر نیست',
+        en: 'Enter a valid email address',
+      },
+      emailMax: {
+        fa: 'ایمیل خیلی طولانی است',
+        en: 'Email is too long',
+      },
+      messageRequired: { fa: 'پیام الزامی است', en: 'Message is required' },
+      messageMax: {
+        fa: 'پیام خیلی طولانی است (حداکثر ۵۰۰۰ نویسه)',
+        en: 'Message is too long (max 5000 characters)',
+      },
+      firstNameMax: {
+        fa: 'نام خیلی طولانی است',
+        en: 'First name is too long',
+      },
+      lastNameMax: {
+        fa: 'نام خانوادگی خیلی طولانی است',
+        en: 'Last name is too long',
+      },
+      phoneInvalid: {
+        fa: 'شماره تماس معتبر نیست (مثلاً +۹۸ ۹۱۲ ۱۲۳ ۴۵۶۷)',
+        en: 'Enter a valid phone number (e.g. +98 912 123 4567)',
+      },
+      phoneMax: {
+        fa: 'شماره تماس خیلی طولانی است',
+        en: 'Phone number is too long',
+      },
+      subjectMax: {
+        fa: 'موضوع خیلی طولانی است',
+        en: 'Subject is too long',
+      },
+    },
   },
 } as const
 
