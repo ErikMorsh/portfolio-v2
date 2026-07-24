@@ -13,7 +13,7 @@ export const aboutCopy = {
   },
   headline: {
     before: {
-      fa: 'علاقه‌مند به پیکسل',
+      fa: 'علاقه‌مند به توسعه',
       en: 'Passionate about pixels',
     },
     accent: {

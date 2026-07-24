@@ -43,6 +43,8 @@ export interface ExperienceItem {
   duration: LocalizedString
   highlights: LocalizedString[]
   relatedProjectIds?: string[]
+  /** Official company / product website (opens externally). */
+  website?: string
   logo: {
     src: string | { src: string }
     alt: LocalizedString

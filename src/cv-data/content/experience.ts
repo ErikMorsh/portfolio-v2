@@ -14,6 +14,7 @@ export const experience: ExperienceItem[] = [
     ),
     role: ls('برنامه‌نویس ارشد Vue.js', 'Senior Vue.js Developer'),
     duration: ls('یک سال', '1 year'),
+    website: 'https://navatel.ir/',
     logo: {
       src: novatelLogo,
       alt: ls('لوگوی نواتل', 'Novatel company logo'),
@@ -41,6 +42,7 @@ export const experience: ExperienceItem[] = [
     company: ls('شرکت گلکسی ویژن', 'Galaxy Vision Co.'),
     role: ls('برنامه‌نویس Vue.js', 'Vue.js Developer'),
     duration: ls('ده ماه', '10 months'),
+    website: 'https://galaxyturbo.co/',
     logo: {
       src: galaxyVisionLogo,
       alt: ls('لوگوی گلکسی ویژن', 'Galaxy Vision company logo'),

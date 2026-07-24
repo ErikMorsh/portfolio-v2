@@ -47,7 +47,7 @@ export const heroCopy = {
     },
   ],
   description: {
-    fa: 'ایده‌های پیچیده را به رابط‌های خوانا و قابل نگهداری تبدیل می‌کنم — با تمرکز روی معماری فرانت‌اند و تجربه کاربری.',
+    fa: 'تبدیل ایده‌های پیچیده به رابط‌های خوانا و قابل نگهداری — با تمرکز روی معماری فرانت‌اند و تجربه کاربری.',
     en: 'I turn complex ideas into clean, maintainable interfaces — focused on frontend architecture and user experience.',
   },
   viewProjects: {

@@ -1,8 +1,7 @@
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import { Box, Typography } from '@mui/material'
-import Link from 'next/link'
 import { pickLocale } from '@/cv-data'
-import { getJobById, jobPaths } from '@/features/portfolio/job'
+import { getJobById } from '@/features/portfolio/job'
 import { useAppTheme } from '@/theme'
 import { experienceCopy, type ExperienceShowcaseItem } from '../data/experience'
 
@@ -17,7 +16,7 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
 
   const role = pickLocale(job.role, locale)
   const company = pickLocale(job.title, locale)
-  const detailHref = jobPaths.detail(job.id)
+  const companyWebsite = job.website
 
   return (
     <Box className="experience-card">
@@ -32,23 +31,25 @@ export function ExperienceCard({ item }: ExperienceCardProps) {
             <Typography className="experience-card__period" component="p">
               {pickLocale(item.period, locale)}
             </Typography>
-            {item.current ? (
-              <span className="experience-card__current">
-                <span className="experience-card__current-dot" aria-hidden />
-                {pickLocale(experienceCopy.current, locale)}
-              </span>
-            ) : null}
           </Box>
         </Box>
 
         <Box className="experience-card__company-row">
-          <Typography
-            className="experience-card__company"
-            component={Link}
-            href={detailHref}
-          >
-            {company}
-          </Typography>
+          {companyWebsite ? (
+            <Typography
+              className="experience-card__company"
+              component="a"
+              href={companyWebsite}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {company}
+            </Typography>
+          ) : (
+            <Typography className="experience-card__company" component="span">
+              {company}
+            </Typography>
+          )}
           <Typography className="experience-card__location" component="p">
             <LocationOnRoundedIcon
               className="experience-card__location-icon"

@@ -4,7 +4,6 @@ export type ExperienceWorkMode = 'onsite' | 'remote' | 'hybrid'
 
 export type ExperienceShowcaseItem = {
   id: string
-  current?: boolean
   period: LocalizedString
   location: LocalizedString
   mode: ExperienceWorkMode
@@ -24,10 +23,6 @@ export const experienceCopy = {
     fa: 'بیش از ۳ سال توسعه حرفه‌ای فرانت‌اند',
     en: '3+ years of professional frontend development',
   },
-  current: {
-    fa: 'فعلی',
-    en: 'Current',
-  },
   mode: {
     onsite: { fa: 'حضوری', en: 'Onsite' },
     remote: { fa: 'ریموت', en: 'Remote' },
@@ -38,16 +33,15 @@ export const experienceCopy = {
 export const experienceShowcase: ExperienceShowcaseItem[] = [
   {
     id: 'gostaran-arya-samane',
-    current: true,
     period: {
-      fa: '۱۴۰۲ — اکنون',
-      en: '2023 — Present',
+      fa: '۱۴۰۴ — ۱۴۰۵',
+      en: '2025 — 2026',
     },
     location: {
       fa: 'تهران، ایران',
       en: 'Tehran, Iran',
     },
-    mode: 'hybrid',
+    mode: 'onsite',
     description: {
       fa: 'رهبری بازطراحی معماری فرانت‌اند، ریفکتور کدهای legacy، استانداردسازی کتابخانه‌ها و مشاوره فنی برای پروژه‌های سازمانی Vue و Nuxt.',
       en: 'Led frontend architecture redesign, legacy refactoring, library standardization, and technical consulting for enterprise Vue and Nuxt products.',
@@ -56,8 +50,8 @@ export const experienceShowcase: ExperienceShowcaseItem[] = [
   {
     id: 'galaxy-vision',
     period: {
-      fa: '۱۴۰۱ — ۱۴۰۲',
-      en: '2022 — 2023',
+      fa: '۱۴۰۳ — ۱۴۰۴',
+      en: '2024 — 2025',
     },
     location: {
       fa: 'تهران، ایران',
@@ -72,8 +66,8 @@ export const experienceShowcase: ExperienceShowcaseItem[] = [
   {
     id: 'sama-tarash-pardaz',
     period: {
-      fa: '۱۳۹۹ — ۱۴۰۱',
-      en: '2020 — 2022',
+      fa: '۱۴۰۱ — ۱۴۰۳',
+      en: '2022 — 2024',
     },
     location: {
       fa: 'تهران، ایران',
