@@ -17,11 +17,14 @@
   text-transform: uppercase;
   font-size: 0.72rem;
   font-weight: 600;
-  transition: color 200ms $hero-ease;
+  opacity: 0.4;
+  animation: hero-scroll-hint-in 500ms $hero-ease 850ms both;
+  transition: color 200ms $hero-ease, opacity 200ms $hero-ease;
 
   &:hover,
   &:focus-visible {
     color: var(--hero-accent);
+    opacity: 0.85;
     outline: none;
   }
 
@@ -39,6 +42,18 @@
   }
 }
 
+@keyframes hero-scroll-hint-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+}
+
 @keyframes hero-scroll-bounce {
   0%,
   100% {
@@ -47,5 +62,16 @@
 
   50% {
     transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-hint {
+    animation: none;
+    opacity: 0.4;
+  }
+
+  .hero-scroll-hint__arrow {
+    animation: none;
   }
 }

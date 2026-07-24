@@ -1,7 +1,13 @@
 'use client'
 
-import { motion, type Variants } from 'motion/react'
-import type { ReactNode } from 'react'
+import { motion, useInView, type Variants } from 'motion/react'
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+  type Ref,
+} from 'react'
 
 export const revealEase = [0.22, 1, 0.36, 1] as const
 
@@ -24,7 +30,10 @@ type RevealProps = {
   id?: string
 }
 
-/** Fades/slides up the first time it enters the viewport. */
+/**
+ * Scroll reveal that stays visible in SSR / pre-hydration HTML.
+ * After mount, off-screen nodes hide and animate in on first observe.
+ */
 export function Reveal({
   children,
   className,
@@ -33,14 +42,28 @@ export function Reveal({
   duration = 0.55,
   id,
 }: RevealProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.2,
+    margin: '0px 0px -8% 0px',
+  })
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    setReady(true)
+  }, [])
+
+  const state = !ready || isInView ? 'show' : 'hidden'
+
   return (
     <motion.div
+      ref={ref}
       id={id}
       className={className}
       variants={variants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2, margin: '0px 0px -8% 0px' }}
+      initial="show"
+      animate={state}
       transition={{ duration, delay, ease: revealEase }}
     >
       {children}
@@ -66,6 +89,20 @@ export function RevealGroup({
   as = 'div',
   id,
 }: RevealGroupProps) {
+  const ref = useRef<HTMLDivElement | HTMLUListElement>(null)
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.15,
+    margin: '0px 0px -6% 0px',
+  })
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    setReady(true)
+  }, [])
+
+  const state = !ready || isInView ? 'show' : 'hidden'
+
   const variants: Variants = {
     hidden: {},
     show: {
@@ -80,16 +117,23 @@ export function RevealGroup({
     id,
     className,
     variants,
-    initial: 'hidden' as const,
-    whileInView: 'show' as const,
-    viewport: { once: true, amount: 0.15, margin: '0px 0px -6% 0px' },
+    initial: 'show' as const,
+    animate: state,
   }
 
   if (as === 'ul') {
-    return <motion.ul {...shared}>{children}</motion.ul>
+    return (
+      <motion.ul ref={ref as Ref<HTMLUListElement>} {...shared}>
+        {children}
+      </motion.ul>
+    )
   }
 
-  return <motion.div {...shared}>{children}</motion.div>
+  return (
+    <motion.div ref={ref as Ref<HTMLDivElement>} {...shared}>
+      {children}
+    </motion.div>
+  )
 }
 
 type RevealItemProps = {
