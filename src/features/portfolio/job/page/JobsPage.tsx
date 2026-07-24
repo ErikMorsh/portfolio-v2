@@ -1,3 +1,5 @@
+'use client'
+
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { Box, Link as MuiLink, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
