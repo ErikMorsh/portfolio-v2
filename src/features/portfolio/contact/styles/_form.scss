@@ -11,6 +11,15 @@
   border-radius: 1.15rem;
   background: var(--contact-card);
   box-shadow: var(--app-shadow);
+  overflow: hidden;
+
+  &--pending {
+    pointer-events: none;
+
+    .contact-form__overlay {
+      pointer-events: auto;
+    }
+  }
 
   &__row {
     display: grid;
@@ -51,6 +60,11 @@
     &:focus {
       border-color: var(--app-accent-border);
       background: var(--app-accent-soft);
+    }
+
+    &:disabled {
+      opacity: 0.72;
+      cursor: not-allowed;
     }
   }
 
@@ -103,17 +117,91 @@
     pointer-events: none;
   }
 
-  &__feedback {
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    padding: 1.25rem;
+    background: color-mix(in srgb, var(--contact-card) 42%, transparent);
+    backdrop-filter: blur(14px) saturate(1.35);
+    -webkit-backdrop-filter: blur(14px) saturate(1.35);
+    animation: contact-overlay-in 320ms $contact-ease both;
+  }
+
+  &__overlay-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+    width: min(100%, 18.5rem);
+    text-align: center;
+  }
+
+  &__overlay-title {
     margin: 0;
-    font-size: 0.9rem;
-    font-weight: 600;
+    color: var(--contact-ink);
+    font-family: 'Syne', 'Vazirmatn', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  &__overlay-text {
+    margin: 0;
+    color: var(--app-muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  &__spinner {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    border: 3px solid color-mix(in srgb, var(--app-accent) 22%, transparent);
+    border-top-color: var(--app-accent);
+    animation: contact-spin 0.85s linear infinite;
+  }
+
+  &__status-icon {
+    display: grid;
+    place-items: center;
+    width: 3.35rem;
+    height: 3.35rem;
+    border-radius: 50%;
+    font-size: 1.65rem;
+    animation: contact-status-pop 480ms $contact-ease both;
 
     &--ok {
-      color: var(--app-accent, #6d28d9);
+      color: #15803d;
+      background: color-mix(in srgb, #22c55e 18%, transparent);
+      box-shadow: 0 0 0 1px color-mix(in srgb, #22c55e 28%, transparent);
     }
 
     &--error {
-      color: #c62828;
+      color: #b91c1c;
+      background: color-mix(in srgb, #ef4444 16%, transparent);
+      box-shadow: 0 0 0 1px color-mix(in srgb, #ef4444 26%, transparent);
+      animation:
+        contact-status-pop 480ms $contact-ease both,
+        contact-status-shake 520ms $contact-ease 180ms both;
+    }
+  }
+
+  &__retry {
+    margin-top: 0.35rem;
+    min-height: 2.5rem !important;
+    padding-inline: 1.15rem !important;
+    border-radius: 0.8rem !important;
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    text-transform: none !important;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.24) !important;
+
+    &:hover {
+      background: linear-gradient(135deg, #9b6cff, #8b5cf6) !important;
     }
   }
 
@@ -131,4 +219,63 @@
 
 [dir='rtl'] .contact-form__submit .MuiButton-endIcon {
   transform: scaleX(-1) rotate(-45deg);
+}
+
+@keyframes contact-overlay-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contact-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes contact-status-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes contact-status-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-5px);
+  }
+
+  40% {
+    transform: translateX(5px);
+  }
+
+  60% {
+    transform: translateX(-3px);
+  }
+
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form__overlay,
+  .contact-form__spinner,
+  .contact-form__status-icon {
+    animation: none;
+  }
 }

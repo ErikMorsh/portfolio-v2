@@ -53,13 +53,14 @@
     &__shell {
       width: min(#{$hero-max}, 100%);
       padding-block: 5rem 2.75rem;
+      flex: 1;
     }
 
     &__stage {
       grid-template-columns: 1fr;
       justify-items: center;
       text-align: center;
-      gap: 1.75rem;
+      gap: 0;
     }
   }
 

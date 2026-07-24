@@ -84,14 +84,17 @@ export const contactCopy = {
     },
     submit: { fa: 'ارسال پیام', en: 'Send message' },
     sending: { fa: 'در حال ارسال…', en: 'Sending…' },
+    successTitle: { fa: 'ارسال شد', en: 'Sent successfully' },
     success: {
       fa: 'پیامت ثبت شد. به‌زودی جواب می‌دم.',
       en: 'Message received — I’ll get back to you soon.',
     },
+    errorTitle: { fa: 'ارسال ناموفق', en: 'Something went wrong' },
     error: {
       fa: 'ارسال پیام ممکن نشد. دوباره تلاش کن.',
       en: 'Could not send your message. Please try again.',
     },
+    retry: { fa: 'تلاش دوباره', en: 'Try again' },
   },
 } as const
 

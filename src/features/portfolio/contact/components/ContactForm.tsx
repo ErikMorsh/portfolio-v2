@@ -1,3 +1,6 @@
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded'
+import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded'
+import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded'
 import SendRoundedIcon from '@mui/icons-material/SendRounded'
 import { Box, Button } from '@mui/material'
 import { useState, type ChangeEvent, type FormEvent } from 'react'
@@ -33,11 +36,19 @@ export function ContactForm() {
   const [status, setStatus] = useState<SubmitStatus>('idle')
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
+  const isPending = status !== 'idle'
+  const isBusy = status === 'loading'
+
   const update =
     (field: keyof ContactFormState) =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setForm((current) => ({ ...current, [field]: event.target.value }))
     }
+
+  const dismissOverlay = () => {
+    setStatus('idle')
+    setErrorMessage(null)
+  }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -81,6 +92,7 @@ export function ContactForm() {
       setForm(initialState)
       setStatus('success')
     } catch (error) {
+      // Keep form values so the user can retry without retyping
       setStatus('error')
       setErrorMessage(
         error instanceof Error
@@ -92,10 +104,11 @@ export function ContactForm() {
 
   return (
     <Box
-      className="contact-form"
+      className={`contact-form${isPending ? ' contact-form--pending' : ''}`}
       component="form"
       onSubmit={handleSubmit}
       noValidate
+      aria-busy={isBusy}
     >
       {/* Honeypot — obscure name so browsers/password managers do not autofill */}
       <input
@@ -120,7 +133,7 @@ export function ContactForm() {
             placeholder={pickLocale(contactCopy.form.firstNamePlaceholder, locale)}
             value={form.firstName}
             onChange={update('firstName')}
-            disabled={status === 'loading'}
+            disabled={isPending}
           />
         </label>
         <label className="contact-form__field">
@@ -134,7 +147,7 @@ export function ContactForm() {
             placeholder={pickLocale(contactCopy.form.lastNamePlaceholder, locale)}
             value={form.lastName}
             onChange={update('lastName')}
-            disabled={status === 'loading'}
+            disabled={isPending}
           />
         </label>
       </Box>
@@ -152,7 +165,7 @@ export function ContactForm() {
           placeholder={pickLocale(contactCopy.form.emailPlaceholder, locale)}
           value={form.email}
           onChange={update('email')}
-          disabled={status === 'loading'}
+          disabled={isPending}
         />
       </label>
 
@@ -168,7 +181,7 @@ export function ContactForm() {
           placeholder={pickLocale(contactCopy.form.phonePlaceholder, locale)}
           value={form.phone}
           onChange={update('phone')}
-          disabled={status === 'loading'}
+          disabled={isPending}
         />
       </label>
 
@@ -182,7 +195,7 @@ export function ContactForm() {
           placeholder={pickLocale(contactCopy.form.subjectPlaceholder, locale)}
           value={form.subject}
           onChange={update('subject')}
-          disabled={status === 'loading'}
+          disabled={isPending}
         />
       </label>
 
@@ -198,32 +211,83 @@ export function ContactForm() {
           placeholder={pickLocale(contactCopy.form.messagePlaceholder, locale)}
           value={form.message}
           onChange={update('message')}
-          disabled={status === 'loading'}
+          disabled={isPending}
         />
       </label>
-
-      {status === 'success' ? (
-        <p className="contact-form__feedback contact-form__feedback--ok" role="status">
-          {pickLocale(contactCopy.form.success, locale)}
-        </p>
-      ) : null}
-      {status === 'error' && errorMessage ? (
-        <p className="contact-form__feedback contact-form__feedback--error" role="alert">
-          {errorMessage}
-        </p>
-      ) : null}
 
       <Button
         className="contact-form__submit"
         type="submit"
         variant="contained"
-        endIcon={<SendRoundedIcon />}
-        disabled={status === 'loading'}
+        sx={{ gap: '6px !important' }}
+        endIcon={
+          <SendRoundedIcon
+            sx={{ transform: 'skewX(15deg) rotate(-90deg)', marginTop: '-0.4rem' }}
+          />
+        }
+        disabled={isPending}
       >
-        {status === 'loading'
-          ? pickLocale(contactCopy.form.sending, locale)
-          : pickLocale(contactCopy.form.submit, locale)}
+        {pickLocale(contactCopy.form.submit, locale)}
       </Button>
+
+      {isPending ? (
+        <div
+          className={`contact-form__overlay contact-form__overlay--${status}`}
+          role={status === 'error' ? 'alert' : 'status'}
+          aria-live="polite"
+        >
+          <div className="contact-form__overlay-card">
+            {status === 'loading' ? (
+              <>
+                <div className="contact-form__spinner" aria-hidden />
+                <p className="contact-form__overlay-title">
+                  {pickLocale(contactCopy.form.sending, locale)}
+                </p>
+              </>
+            ) : null}
+
+            {status === 'success' ? (
+              <>
+                <div className="contact-form__status-icon contact-form__status-icon--ok" aria-hidden>
+                  <CheckRoundedIcon fontSize="inherit" />
+                </div>
+                <p className="contact-form__overlay-title">
+                  {pickLocale(contactCopy.form.successTitle, locale)}
+                </p>
+                <p className="contact-form__overlay-text">
+                  {pickLocale(contactCopy.form.success, locale)}
+                </p>
+              </>
+            ) : null}
+
+            {status === 'error' ? (
+              <>
+                <div
+                  className="contact-form__status-icon contact-form__status-icon--error"
+                  aria-hidden
+                >
+                  <ErrorOutlineRoundedIcon fontSize="inherit" />
+                </div>
+                <p className="contact-form__overlay-title">
+                  {pickLocale(contactCopy.form.errorTitle, locale)}
+                </p>
+                <p className="contact-form__overlay-text">
+                  {errorMessage ?? pickLocale(contactCopy.form.error, locale)}
+                </p>
+                <Button
+                  className="contact-form__retry"
+                  type="button"
+                  variant="contained"
+                  startIcon={<RefreshRoundedIcon />}
+                  onClick={dismissOverlay}
+                >
+                  {pickLocale(contactCopy.form.retry, locale)}
+                </Button>
+              </>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
     </Box>
   )
 }
